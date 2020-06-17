@@ -1,0 +1,278 @@
+<div>
+
+  <!--
+  <mat-form-field class="example-full-width">
+    <input matInput type="date" placeholder="Choose a date"/>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>-->
+
+  <!--<button mat-raised-button (click)="picker.open()">Open</button>-->
+
+  <div>
+  <mat-toolbar color='primary'>
+      
+    <mat-toolbar-row>
+  
+      <!-- boton ir atras -->
+      <button mat-icon-button color="" aria-label="Atras" class="botonIcono" (click)="volverAtras()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+  
+      <span>Redhubs</span>
+  
+    </mat-toolbar-row>
+  </mat-toolbar>
+  </div>
+  
+  <div>
+    <!-- poner varios mat card si eso -->
+    <mat-card class="boxmod">
+      <mat-card-title>Datos de Registro</mat-card-title>
+    <mat-card-content>
+    
+    <form [formGroup]="formularioRegistro" (submit)="onSubmmit(formularioRegistro.value, $event)">
+  
+    <!-- datos de entrada -->
+    <!--
+    <mat-card class="boxmod">
+      <mat-card-title>Datos de entrada</mat-card-title>
+      <mat-card-content>-->
+    <mat-form-field>
+      <mat-label>
+        Nombre de usuario *
+      </mat-label>
+      <input matInput type="text" formControlName="nombreUsuFCNRegistro" cdkFocusInitial>
+      <mat-error *ngIf="formularioRegistro.get('nombreUsuFCNRegistro').hasError('required')">
+        Usuario obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        contraseña *
+      </mat-label>
+      <input matInput type="password" formControlName="passwordFCNRegistro">
+      <mat-error *ngIf="formularioRegistro.get('passwordFCNRegistro').hasError('required')">
+        Contraseña obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        Repite contraseña *
+      </mat-label>
+      <input matInput type="password" formControlName="passwordRepeFCNRegistro">
+      <mat-error *ngIf="formularioRegistro.get('passwordRepeFCNRegistro').hasError('required')">
+        Contraseña obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        email entrada *
+      </mat-label>
+      <input matInput type="email" placeholder="example@gmail.com" formControlName="emailEntradaFCNRegistro">
+      <mat-error *ngIf="formularioRegistro.get('emailEntradaFCNRegistro').hasError('required')">
+        Email obligatorio
+      </mat-error>
+      <mat-error *ngIf="formularioRegistro.get('emailEntradaFCNRegistro').hasError('email')">
+        Formato email incorrecto
+      </mat-error>
+    </mat-form-field>
+    <br>
+
+    <!-- poner checkbox  (lo hay de disenyo de boton) -->
+    <mat-slide-toggle (click)="emailContactDistinto($event)">Usar un email de contacto distinto</mat-slide-toggle>
+    <br>
+
+    <!-- comprobar esta parte -->
+    <mat-form-field *ngIf="usarEmailContact == true"><!-- Nota para el usuario, si se deja vacio no se muestra email a otros perfiles -->
+      <mat-label>
+        email
+      </mat-label>
+      <input matInput type="email" placeholder="example@gmail.com" formControlName="emailFCNRegistro">
+      <mat-error *ngIf="formularioRegistro.get('emailFCNRegistro').hasError('email')">
+        Formato email incorrecto
+      </mat-error>
+    </mat-form-field>
+    <br>
+
+    <!--
+    </mat-card-content>
+    </mat-card>-->
+
+    <!-- datos personales -->
+    <!--<mat-card class="boxmod">
+      <mat-card-title>Datos personales</mat-card-title>
+      <mat-card-content>-->
+    <mat-form-field>
+      <mat-label>
+        nombre
+      </mat-label>
+      <input matInput type="text" formControlName="nombreFCNRegistro">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        apellidos
+      </mat-label>
+      <input matInput type="text" formControlName="apellidosFCNRegistro">
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <mat-label>Fecha de nacimiento *</mat-label>
+      <!-- <input matInput type="date" [max]="fechaMax" formControlName="fechaNacimientoFCNRegistro"> -->
+      <input matInput [matDatepicker]="datePickerFechaNac" [max]="fechaMax" formControlName="fechaNacimientoFCNRegistro">
+      <mat-datepicker-toggle [for]="datePickerFechaNac" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #datePickerFechaNac></mat-datepicker>
+      <mat-error *ngIf="formularioRegistro.get('fechaNacimientoFCNRegistro').hasError('required')">
+        Fecha de nacimiento obligatoria
+      </mat-error>
+    </mat-form-field>
+    <br>
+
+    <!-- placeholder="Fecha de nacimiento" -->
+    <!--<mat-datepicker></mat-datepicker>--><!-- los errores vienen del mat-datepicker-->
+    
+    <!--
+    </mat-card-content>
+    </mat-card>-->
+  
+    
+    <!-- datos de contacto -->
+    <!--
+    <mat-card class="boxmod">
+      <mat-card-title>
+        Datos de contacto
+      </mat-card-title>
+      <mat-card-content>-->
+
+      <mat-form-field>
+      <mat-label>
+        Pais
+      </mat-label>
+      
+      <mat-select formControlName="paisFCNRegistro">  
+        <mat-option *ngFor="let pais of paises" [value]="pais.value">
+          {{pais.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    
+    <mat-form-field>
+      <mat-label>
+        ciudad
+      </mat-label>
+      <input matInput type="text" formControlName="ciudadFCNRegistro">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        región
+      </mat-label>
+      <input matInput type="text" formControlName="regionFCNRegistro">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        teléfono
+      </mat-label>
+      <input matInput type="text" formControlName="telfFCNRegistro">
+    </mat-form-field>
+    <br>
+
+    <!--
+      </mat-card-content>
+    </mat-card>-->
+  
+    <!-- Final del registro -->
+    <!--<mat-card class="boxmod">
+      <mat-card-title>
+        Final del registro 
+      </mat-card-title>
+      <mat-card-content>-->
+        <!-- los checkbox tienen que ser mat check box-->
+
+        <!-- Nota: los checkbox con los card, dan problemas de visualizacion de componentes -->
+        <!--<mat-checkbox formControlName="esPrivadoFCNRegistro">Perfil privado</mat-checkbox>-->
+
+        <mat-slide-toggle formControlName="esPrivadoFCNRegistro" (click)="esPerfilPrivado($event)">Perfil privado</mat-slide-toggle>
+        <br>
+
+        <!--<mat-checkbox formControlName="aceptPolPrivaFCNRegistro">Acepta la politica de privacidad*</mat-checkbox>-->
+        
+        <mat-slide-toggle formControlName="esPrivadoFCNRegistro" (click)="aceptaPoliticaPriva($event)">Acepta la politica de privacidad *</mat-slide-toggle>
+        <br>
+
+        <a mat-button color="primary" href="home/Redhubs/polPriva" target="_blank">Politica de privacidad</a>
+        <br>
+
+    <!--
+    <mat-form-field class="form-group">
+      <mat-label>Perfil privado</mat-label>
+      <<input matInput type="checkbox" formControlName="esPrivadoFCNRegistro">
+      <mat-checkbox formControlName="esPrivadoFCNRegistro">Perfil privado</mat-checkbox>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Acepta la politica de privacidad*</mat-label>
+      <input matInput type="checkbox" formControlName="AceptPolPrivaFCNRegistro">
+      <mat-checkbox formControlName="AceptPolPrivaFCNRegistro">Acepta la politica de privacidad*</mat-checkbox>
+    </mat-form-field>
+    <br>-->
+    
+    <!-- poner en una ruta, abrir en una ventana a parte
+    <button mat-button color="primary" (click)="politicaPrivacidad($event)">Politica de privacidad</button>
+    <br>
+    -->
+
+    
+    <button mat-raised-button (click)="volverAtras($event)">Atras</button>
+    <button mat-raised-button type="submit" color="primary">Registrarse</button>
+
+    <mat-card-content>
+      <div class="mat-body-1" *ngIf="usuarioCorrectoRegistrarse == false"><p class="textoError">{{tipoErrorString}}</p></div>
+    </mat-card-content>
+    
+
+
+    <!-- hacerlo checkbox y poner enlace a la politica de privacidad -->
+
+  
+
+    <!-- poner enlace a la politica de privacidad -->
+
+    <!-- idUsu automatico -->
+
+    <!-- no admin -->
+    <!-- usuario activo por defecto -->
+    <!-- no baneado -->
+    <!-- no fecha de fin de baneo -->
+
+    <!-- estado (se configura en el perfil) -->
+    <!-- numVisitas 0 -->
+
+    <!-- fecha ultimo login nada mas se crea la cuenta y accede a esta -->
+    <!-- foto perfil (se configura en el perfil) -->
+    <!-- foto portada (se configura en el perfil) -->
+
+    <!-- fechaAlta automatico -->
+
+    <!-- Va junto al email de entrada-->
+
+    <!-- poner checkbox -->
+    <!-- </mat-card-content>
+    </mat-card>--> 
+    
+  </form>
+  </mat-card-content>
+  </mat-card>
+
+  
+  </div>
+
+
+</div>

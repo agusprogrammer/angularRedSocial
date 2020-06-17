@@ -1,0 +1,85 @@
+<div>
+
+<!-- toolbar -->
+<div>
+
+  <mat-toolbar color='primary'>
+    
+    <!-- poner if mostrar boton sidenav cuando este logueado-->
+      <!-- pasar valor para abrir sidenav-->
+  
+    <mat-toolbar-row><!-- *ngIf="usuLoginBool" -->
+      <!-- boton sidenav-->
+      <button mat-icon-button color="" aria-label="Menu" class="botonIcono" (click)="muestraSideNav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      
+      <span>Redhubs</span>
+  
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <div>
+
+<!-- sidenav menu -->
+<div class="contenidoNav">
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" [(opened)]="sidenavOpen">
+      
+      <!-- Publicaciones de amigos -->
+      <button class="btnSideNav" mat-button>Inicio</button>
+      <br>
+
+      <!-- Publicaciones publicas por orden de 
+        fecha de toda la red (Coger solo las ultimas, las demas se cargan)-->
+      <button class="btnSideNav" mat-button>Explorar</button>
+      <br>
+      
+      <!-- nuestro perfil donde ponemos nuestras entradas y publicaciones -->
+      <!-- Podemos tener unos componentes para mostrar imagenes y videos -->
+      <!-- Enlace a mostrar nuestros amigos --> 
+      <button class="btnSideNav" mat-button>Perfil</button>
+      <br>
+        
+      <!-- Permite subir fotos y videos -->
+      <button class="btnSideNav" mat-button>Fotos</button>
+      <br>
+  
+      <button class="btnSideNav" mat-button>Videos</button>
+      <br>
+        
+      <!-- Nuestros amigos, con opciones de buscar y visualizar otros perfiles -->
+      <button class="btnSideNav" mat-button>Amigos</button>
+      <br>
+
+      <button class="btnSideNav" mat-button>Buscar Amigos</button>
+      <br>
+      
+      <!-- Dentro de las opciones se gestiona la privacidad,
+         y esta incluio el apartado de pol. priva. -->
+      <button class="btnSideNav" mat-button>Opciones</button>
+      <br>
+  
+      <button class="btnSideNav" mat-button (click)="salirAplicacion()">Salir</button>
+      <br>
+  
+    </mat-sidenav>
+    <mat-sidenav-content><!-- zona de mostrar los componentes -->
+      <!--pagina con sidenav--><!-- las cosas de inicio -->
+      <!-- inicio -->
+
+      <!-- mirar el tema de estilos de este componente mas adelante -->
+    <mat-card class="boxmod">
+      <mat-card-title>
+        Inicio
+      </mat-card-title>
+    </mat-card>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+  
+
+</div>
+

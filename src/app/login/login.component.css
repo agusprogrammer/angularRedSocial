@@ -1,0 +1,25 @@
+
+.boxmod {
+    width: auto;
+    height: auto;
+    margin: 20px;
+    padding: 20px;
+}
+
+.toolbarClass {
+    width: auto;
+    height: 150px;
+}
+
+button {
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+a {
+    margin-top: 10px;
+}
+
+.mat-body-1 {
+    margin-left: 15px;
+}

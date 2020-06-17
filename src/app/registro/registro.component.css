@@ -1,0 +1,35 @@
+
+.boxmod {
+    width: auto;
+    height: auto;
+    margin: 20px;
+    padding: 20px;
+}
+
+.botonIcono{
+    margin: 10px;
+}
+
+button {
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+mat-card {
+    width: auto;
+    height: auto;
+    margin: 20px;
+    padding: 20px;
+}
+
+mat-form-field {
+    margin: 10px;
+}
+
+.textoError {
+    color: red;
+    margin-top: 5px;
+    margin-left: 2px;
+}
+
+
