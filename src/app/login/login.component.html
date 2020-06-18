@@ -1,17 +1,10 @@
 <div>
 
-  <!--
-  <mat-toolbar color='primary'>
-    <mat-toolbar-row>
-      <span>Redhubs</span>
-    </mat-toolbar-row>
-  </mat-toolbar> -->
-
   <div>
 
     <mat-toolbar color='primary'>
       <mat-toolbar-row>
-        <span>Redhubs</span>
+        <span>Network</span>
       </mat-toolbar-row>
     </mat-toolbar>
     
@@ -22,10 +15,12 @@
       Login
     </mat-card-title>
     
-    <!-- mirar las validaciones de datos -->
+
     <mat-card-content>
 
       <form [formGroup]="formulario" (submit)="onSubmmit(formulario.value, $event)">
+        
+        <!-- Campo de email de entrada -->
         <mat-form-field class="form-group">
           <mat-label>Email de entrada</mat-label>
           <input matInput type="email" placeholder="example@gmail.com" formControlName="emailEntradaFCNLogin">
@@ -38,6 +33,7 @@
         </mat-form-field>
         <br/>
 
+        <!-- campo de contraseña -->
         <mat-form-field class="form-group">
           <mat-label>Contraseña</mat-label>
           <input matInput type="password" formControlName="passwordFCNLogin">
@@ -53,11 +49,7 @@
 
         <button mat-button color="primary" (click)="politicaPrivacidad($event)">Politica de privacidad</button>
 
-        <!-- <a mat-button target="_blank" href="" color="primary">Politica de privacidad</a>-->
-        <!-- nota: mirar lo del _blank, _self-->
-        <!--<a routerLink="home/politicaPriv">Politica de privacidad</a>-->
-
-        <!-- Usuario incorrecto -->
+        <!-- se muestra si el usuario devuelto es incorrecto -->
         <mat-card-content>
           <div class="mat-body-1" *ngIf="usuarioValido == false">Usuario incorrecto, o no existente</div>
         </mat-card-content>

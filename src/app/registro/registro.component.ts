@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from '../servicios/usuario.service';
 import { UsuarioModel } from '../modelos/UsuarioModel';
@@ -19,38 +19,6 @@ interface Pais {
 })
 export class RegistroComponent implements OnInit {
 
-  // comunicacion entre componentes
-  // @Input() selectorNumCompInpReg: number;  // selector de componentes
-
-  // @Output() selectorNumCompOut = new EventEmitter();  // selector de componentes
-  // selectComp: number;
-
-  // variables
-  formularioRegistro: FormGroup;
-  usarEmailContact: boolean; // opcion que te permite introducir un email visible
-  passwdCorrecto: boolean; // nos indica si la repeticion del campo passwd es correcta
-  usuarioRegistro: UsuarioModel; // usuario que registramos
-  usuarioCorrectoRegistrarse: boolean;
-  // indica a la interfaz de usuario si la Api da una respuesta correcta
-  tipoErrorString: string; // tipo de error al registrarse
-
-  // variables para la fecha por defecto
-  fechaAnyoReg: number;
-  fechaDiaReg: number;
-  fechaMesReg: number;
-  fechaHoraReg: number;
-  fechaMinReg: number;
-  fechaSecReg: number;
-  fechaRegLogin: Date; // fecha del primer registro
-
-  // variables checkbox opciones de privacidad y politica de privacidad
-  perfilPrivadoBool: boolean; // el perfil es privado
-  aceptaPolPriva: boolean;    // Acepta la politica de privacidad
-
-  // Variables para acceder al inicio con el usuario registrado
-  usersAny: any[] = [];
-  idUsu: number;  // comprobar si hay usuario creado
-
   // lista de paises para campo pais
   paises: Pais[] = [
     { value: 'Espanya', viewValue: 'España' },
@@ -60,18 +28,44 @@ export class RegistroComponent implements OnInit {
     { value: 'Italia', viewValue: 'Italia' }
   ];
 
+  // variables
+  formularioRegistro: FormGroup;  // formulario
+  usarEmailContact: boolean;
+  // opcion que te permite introducir el mismo email o no para mostrar en los datos de usuario
+  passwdCorrecto: boolean; // nos indica si la repeticion del campo passwd es correcta
+  usuarioRegistro: UsuarioModel; // usuario que registramos
+  usuarioCorrectoRegistrarse: boolean;
+  // indica a la interfaz de usuario si la Api da una respuesta correcta
+  tipoErrorString: string;
+  // tipo de error al registrarse, nos indica que esta mal en el registro del usuario
+
+  // variables para la fecha por defecto, sirven para
+  // seleccionar la fecha del primer registro
+  fechaAnyoReg: number;
+  fechaDiaReg: number;
+  fechaMesReg: number;
+  fechaHoraReg: number;
+  fechaMinReg: number;
+  fechaSecReg: number;
+  fechaRegLogin: Date;
+  // fecha del primer registro y login en la plataforma
+
+  // variables checkbox opciones de privacidad y politica de privacidad
+  perfilPrivadoBool: boolean; // el perfil es privado
+  aceptaPolPriva: boolean;    // Acepta la politica de privacidad
+
+  // Variables para acceder al inicio con el usuario registrado
+  usersAny: any[] = [];
+  idUsu: number;  // comprobar si hay usuario creado
+
   // variables fecha, fechas limite para la fecha de nacimiento
   // tipo number
   fechaAnyoMaxNum = Number(new Date().getFullYear().toString()); // anyo de hoy
-  fechaDia = Number(new Date().getDate().toString());      // dia (Nota: day es num dia de semana)
-  fechaMes = Number(new Date().getMonth().toString());     // mes
-
+  fechaDia = Number(new Date().getDate().toString());  // dia (Nota: day es num dia de semana)
+  fechaMes = Number(new Date().getMonth().toString()); // mes
   fechaAnyoMinEntradaNum = this.fechaAnyoMaxNum - 14;  // no permitida la entrada a menores de 14
-
   fechaMax = new Date(this.fechaAnyoMinEntradaNum, this.fechaMes, this.fechaDia);
 
-  // fechaMin = new Date();
-  // date = new FormControl(new Date());
 
   constructor(private usuServ: UsuarioService, private router: Router, private auth: AuthGuardService) { }
 
@@ -124,7 +118,8 @@ export class RegistroComponent implements OnInit {
 
   }
 
-  // Seleccionar opcion email
+  // Seleccionar la opcion de usar el email de entrada
+  // distinto del email para mostrar en la plataforma
   public emailContactDistinto($event) {
 
     if (this.usarEmailContact === false) {
@@ -133,13 +128,11 @@ export class RegistroComponent implements OnInit {
       this.usarEmailContact = false;
     }
 
-    // console.log(this.usarEmailContact);
-
   }
 
   // volver atras
   public volverAtras($event) {
-    this.router.navigate(['home/Redhubs/login']);
+    this.router.navigate(['home/Network/login']);
   }
 
   // Registrar usuario
@@ -156,7 +149,7 @@ export class RegistroComponent implements OnInit {
         this.usuarioRegistro.nombreUsu = formValue.nombreUsuFCNRegistro;
         this.usuarioRegistro.contrasenya = formValue.passwordFCNRegistro;
 
-        // poner email
+        // comprobar si la opcion de poner email distinto al de entrada ha sido aceptada
         if (this.usarEmailContact === true) {
           this.usuarioRegistro.emailEntrada = formValue.emailEntradaFCNRegistro;
           this.usuarioRegistro.email = formValue.emailFCNRegistro;
@@ -168,21 +161,14 @@ export class RegistroComponent implements OnInit {
         this.usuarioRegistro.nombre = formValue.nombreFCNRegistro;
         this.usuarioRegistro.apellidos = formValue.apellidosFCNRegistro;
 
-        // comprobar la fecha antes de insertar
         this.usuarioRegistro.fechaNacimiento = formValue.fechaNacimientoFCNRegistro;
 
-        // Ver si se puede obtener el valor del campo select de esta forma
         this.usuarioRegistro.pais = formValue.paisFCNRegistro;
 
         this.usuarioRegistro.ciudad = formValue.ciudadFCNRegistro;
         this.usuarioRegistro.region = formValue.regionFCNRegistro;
         this.usuarioRegistro.telefono = formValue.telfFCNRegistro;
 
-        // Los valores deben de ser true o false, los vacios pasarlos a false
-        // Como son otro tipo de campos, se ha puesto de otra forma
-
-        // this.usuarioRegistro.perfilPrivado = formValue.esPrivadoFCNRegistro;
-        // this.usuarioRegistro.aceptaPolPriv = formValue.aceptPolPrivaFCNRegistro;
 
         if (this.perfilPrivadoBool === false) {
           this.usuarioRegistro.perfilPrivado = 0;
@@ -206,24 +192,12 @@ export class RegistroComponent implements OnInit {
         this.usuarioRegistro.fechaAlta = this.fechaPrimerLoginRegistro();
         // --------------------------------------
 
-        // Crear metodo para registrar el usuario (ver si esta creado, puede ser el post)
-        // continuar con lo del servicio
-        // this.usuServ.postUser();
-
-        // despues de registrar, navegar atras (implementar parte en el app component)
-        // meterse en el inicio
-
-        // console.log(this.usuarioRegistro);
-        // descomentar luego
-        // this.router.navigate(['home/Redhubs/inicio']);
-
         this.usuServ.postUser(this.usuarioRegistro).subscribe(
 
           resp => {
-            // console.log(resp);
-            // return resp;
-            // this.registroPostResulString = resp.toString();
 
+            // comprobacion de la respuesta al crear el usuario,
+            // manejamos las respuestas de la API
             if (resp.toString() === '') {
               this.tipoErrorString = 'Problemas de conexión con el servidor';
               this.usuarioCorrectoRegistrarse = false;
@@ -232,7 +206,7 @@ export class RegistroComponent implements OnInit {
               this.tipoErrorString = '';
               this.usuarioCorrectoRegistrarse = true;
 
-              this.irAlInicio();
+              this.irAlInicio();  // ir al inicio
 
             } else if (resp.toString() === 'Problemas, usuario no insertado') {
               this.tipoErrorString = 'Problemas de registro, el email o usuario coinciden con uno ya registrado';
@@ -269,7 +243,7 @@ export class RegistroComponent implements OnInit {
 
   }
 
-  // Nos lleva al inicio despues de registrarnos
+  // Metodos que nos lleva al inicio despues de registrarnos
   private irAlInicio() {
     this.usuServ.getUserLogin(this.usuarioRegistro.emailEntrada, this.usuarioRegistro.contrasenya).subscribe(
       data => {
@@ -279,9 +253,9 @@ export class RegistroComponent implements OnInit {
         this.idUsu = this.usersAny['idUsu'];
 
         if (this.idUsu >= 1) {
-          this.auth.activarDesactLogin(true); // activar el login
+          this.auth.activarDesactLogin(true); // activar el login (La guardia de la ruta deja pasar)
           this.auth.canActivate();
-          this.router.navigate(['home/Redhubs/inicio', this.idUsu]);
+          this.router.navigate(['home/Network/inicio', this.idUsu]);
         }
 
       }
@@ -289,7 +263,7 @@ export class RegistroComponent implements OnInit {
 
   }
 
-  // comprobar contrasenya
+  // comprobar que la contrasenya es igual en ambos campos
   private comprobarPasswd(formValue: any) {
 
     this.passwdCorrecto = false;
@@ -304,7 +278,8 @@ export class RegistroComponent implements OnInit {
 
   }
 
-  // poner fecha por defecto
+  // poner fecha por defecto del primer login despues del registro
+  // tambien se usa como la fecha de alta
   private fechaPrimerLoginRegistro(): Date {
     // variables fecha, fechas limite para la fecha de nacimiento
     // tipo number
@@ -318,13 +293,12 @@ export class RegistroComponent implements OnInit {
     this.fechaSecReg = Number(new Date().getSeconds().toString());
 
     this.fechaRegLogin = new Date(this.fechaAnyoReg, this.fechaMesReg, this.fechaDiaReg, this.fechaHoraReg, this.fechaMinReg, this.fechaSecReg);
-    // console.log(this.fechaRegLogin);
 
     return this.fechaRegLogin;
 
   }
 
-  // Opciones de privacidad
+  // Evento que cambia la opcion de si ponemos el perfil privado o publico
   public esPerfilPrivado($event) {
 
     if (this.perfilPrivadoBool === false) {
@@ -336,6 +310,7 @@ export class RegistroComponent implements OnInit {
 
   }
 
+  // evento que indica si la politica de privacidad es aceptada por el usuario
   public aceptaPoliticaPriva($event) {
 
     if (this.aceptaPolPriva === false) {

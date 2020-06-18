@@ -54,7 +54,7 @@ export class AppComponent {
   // valor para volver atras sin loggin
   volverAtras() {
     // this.selectorNumComp = 1;
-    this.router.navigate(['home/Redhubs/login']);
+    this.router.navigate(['home/Network/login']);
   }
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';  // Importamos el HttpClient
+import { HttpClient } from '@angular/common/http';  // Importamos el HttpClient
 import { UsuarioModel } from '../modelos/UsuarioModel';
 import { Observable } from 'rxjs';
 
@@ -14,38 +14,21 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
   // obtener usuario por id
-  getUserId(userId: number) {
-    // return
-    this.http.get('http://localhost:50139/api/UsuarioApi/' + userId).subscribe(
-      resp => {
-        console.log(resp);
-      }
-    );
+  getUserId(userId: number): Observable<any> {
+    return this.http.get('http://localhost:50139/api/UsuarioApi/' + userId);
+
   }
 
   // obtener usuario por login
-  // Se ha anyadido el Observable<any>
   getUserLogin(emailEntrada: string, password: string): Observable<any> {
     return this.http.get('http://localhost:50139/api/UsuarioApi/' + emailEntrada + '/' + password);
-
-    /*
-    this.http.get('http://localhost:50139/api/UsuarioApi/' + emailEntrada + '/' + password).subscribe(
-      resp => {
-
-        console.log(resp);
-      }
-    );
-    */
-
 
   }
 
   // registrar usuario
   postUser(userPost: UsuarioModel) {
 
-    // tslint:disable-next-line:ban-types
-    // const respuesta: Object = new Object();
-    this.registroPostResulString = '';
+    // this.registroPostResulString = '';
 
     const usu = new UsuarioModel();
     usu.idUsu = userPost.idUsu;
@@ -75,19 +58,6 @@ export class UsuarioService {
 
     // obtener respuesta
     return this.http.post('http://localhost:50139/api/UsuarioApi/', usu);
-    /*
-    .subscribe(
-      resp => {
-        console.log(resp);
-        // return resp;
-        this.registroPostResulString = resp.toString();
-      }
-    );
-    */
-
-    // console.log(this.registroPostResulString);
-
-    // return this.registroPostResulString;
 
   }
 

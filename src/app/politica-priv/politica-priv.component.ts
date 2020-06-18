@@ -14,7 +14,7 @@ export class PoliticaPrivComponent implements OnInit {
   }
 
   volverAtras() {
-    this.router.navigate(['home/Redhubs/login']);
+    this.router.navigate(['home/Network/login']);
   }
 
 }

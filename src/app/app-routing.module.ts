@@ -10,16 +10,16 @@ import { AuthGuardService } from './servicios/auth-guard.service';
 
 const routes: Routes = [
 
-    { path: 'home/Redhubs/login', component: LoginComponent },
-    { path: 'home/Redhubs/polPriva', component: PoliticaPrivComponent },
-    { path: 'home/Redhubs/registro', component: RegistroComponent },
-    { path: 'home/Redhubs/inicio/:idUsu', component: AppInicioComponent, canActivate: [AuthGuardService] }, // Necesario auth, poner el id si eso en url
-    { path: 'home/Redhubs', component: AppComponent },
-    { path: '**', redirectTo: 'home/Redhubs/login' }
+    { path: 'home/Network/login', component: LoginComponent },
+    { path: 'home/Network/polPriva', component: PoliticaPrivComponent },
+    { path: 'home/Network/registro', component: RegistroComponent },
+    { path: 'home/Network/inicio/:idUsu', component: AppInicioComponent, canActivate: [AuthGuardService] }, // Necesario auth, poner el id si eso en url
+    { path: 'home/Network', component: AppComponent },
+    { path: '**', redirectTo: 'home/Network/login' }
 
     /*
     {
-        path: 'home/Redhubs/polPriva', component: PoliticaPrivComponent,
+        path: 'home/Network/polPriva', component: PoliticaPrivComponent,
         pathMatch: 'full'
     },
     */
@@ -27,7 +27,7 @@ const routes: Routes = [
     /*
     {
         // ruta general
-        path: 'home/Redhubs', component: AppComponent,
+        path: 'home/Network', component: AppComponent,
         pathMatch: 'full'          // la ruta debe de coincidir exactamente
         // Componente al que le ponemos lo de las rutas
     },
@@ -35,12 +35,12 @@ const routes: Routes = [
         // en la primera ruta, nos vamos al login
         path: '',                   // ruta de inicio '/'
         pathMatch: 'full',          // la ruta debe de coincidir exactamente
-        redirectTo: 'home/Redhubs'    // Ir al login
+        redirectTo: 'home/Network'    // Ir al login
     },
     {
         // nota: este path debe de estar siempre el ultimo
         path: '**',
-        redirectTo: 'home/Redhubs'
+        redirectTo: 'home/Network'
 
         // Cualquier otra ruta del programa que se dirijira al login
         // Nota: poner si eso una pantalla de no encontrado (como lo de 404 not found)

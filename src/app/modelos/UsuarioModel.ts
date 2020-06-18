@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 export class UsuarioModel {
     idUsu: number;
     nombreUsu: string;  // nombre de usuario
-    fechaAlta: Date;        // dateTime (Despues se mira el formato de fechas)
+    fechaAlta: Date;    // dateTime
     pais: string;
     ciudad: string;
     region: string;
