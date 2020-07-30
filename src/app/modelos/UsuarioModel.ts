@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 
 export class UsuarioModel {
     idUsu: number;
@@ -23,8 +22,8 @@ export class UsuarioModel {
     estado: string;        // Cosas de la cuenta
     numVisitas: number;
     fechaUltLogin: Date;   // dateTime
-    fotoPerfil: string;    // ver si eso mas adelante el file upload y la imagenes
-    fotoPortada: string;
+    fotoPerfil: Blob;    // ver si eso mas adelante el file upload y la imagenes
+    fotoPortada: Blob;
 }
 
 // Nota: como no hay dateTime en angular se usa Date

@@ -15,6 +15,7 @@ export class AppInicioComponent implements OnInit {
   sidenavOpen: boolean;    // abre o cierra el sidenav
   idUsuLoginString: string;
   idUsuLogin: number;
+  selectorComponente: number; // selecciona el componente a mostrar
 
   // usuario obtenido
   usersAny: any[] = [];
@@ -38,6 +39,8 @@ export class AppInicioComponent implements OnInit {
     // cuando se inicia el componente de inicio, obtiene el usuario que ha accedido
     this.buscarUsuarioId();
 
+    this.selectorComponente = 1;
+
   }
 
   // muestra sideNav
@@ -55,6 +58,11 @@ export class AppInicioComponent implements OnInit {
   // Salir de la aplicacion
   salirAplicacion() {
     this.router.navigate(['home/Network/login']);
+  }
+
+  // metodo para seleccionar que componente se muestra en la interfaz
+  seleccionarComponente(numSelect: number) {
+    this.selectorComponente = numSelect;
   }
 
   // Nota: actualizar la fecha del ultimo login

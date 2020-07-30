@@ -27,39 +27,49 @@
     <mat-sidenav #sidenav mode="side" [(opened)]="sidenavOpen">
       
       <!-- Publicaciones de amigos -->
-      <button class="btnSideNav" mat-button>Inicio</button>
+      <button class="btnSideNav" mat-button  (click)="seleccionarComponente(1)">Inicio</button>
       <br>
 
       <!-- Publicaciones publicas por orden de 
-        fecha de toda la red (Coger solo las ultimas, las demas se cargan)-->
-      <button class="btnSideNav" mat-button>Explorar</button>
+        fecha de toda la red (Coger solo las ultimas, las demas se cargan mediante boton)-->
+      <button class="btnSideNav" mat-button  (click)="seleccionarComponente(2)">Explorar Publicaciones</button>
       <br>
       
       <!-- nuestro perfil donde ponemos nuestras entradas y publicaciones -->
       <!-- Podemos tener unos componentes para mostrar imagenes y videos -->
       <!-- Enlace a mostrar nuestros amigos --> 
-      <button class="btnSideNav" mat-button>Perfil</button>
+      <button class="btnSideNav" mat-button (click)="seleccionarComponente(3)">Perfil</button>
       <br>
         
       <!-- Permite subir fotos y videos -->
-      <button class="btnSideNav" mat-button>Fotos</button>
+      <button class="btnSideNav" mat-button  (click)="seleccionarComponente(4)">Fotos</button>
       <br>
   
-      <button class="btnSideNav" mat-button>Videos</button>
+      <button class="btnSideNav" mat-button  (click)="seleccionarComponente(5)">Videos</button>
       <br>
-        
-      <!-- Nuestros amigos, con opciones de buscar y visualizar otros perfiles -->
-      <button class="btnSideNav" mat-button>Amigos</button>
+      
+      <!-- Peticiones de amistad tanto recibidas como hechas -->
+      <button class="btnSideNav" mat-button  (click)="seleccionarComponente(6)">Peticiones Amistad</button>
       <br>
 
-      <button class="btnSideNav" mat-button>Buscar Amigos</button>
+      <!-- Nuestros amigos, con opciones de buscar y visualizar otros perfiles -->
+      <button class="btnSideNav" mat-button  (click)="seleccionarComponente(7)">Amigos</button>
+      <br>
+      
+      <!-- Nuestros amigos y buscar amigos -->
+      <button class="btnSideNav" mat-button  (click)="seleccionarComponente(8)">Buscar Amigos</button>
       <br>
       
       <!-- Dentro de las opciones se gestiona la privacidad,
          y esta incluio el apartado de pol. priva. -->
-      <button class="btnSideNav" mat-button>Opciones</button>
+      <button class="btnSideNav" mat-button  (click)="seleccionarComponente(9)">Opciones</button>
       <br>
-  
+
+      <!-- boton de ayuda -->
+      <button class="btnSideNav" mat-button  (click)="seleccionarComponente(10)">Ayuda</button>
+      <br>
+      
+      <!-- salir de la aplicacion -->
       <button class="btnSideNav" mat-button (click)="salirAplicacion()">Salir</button>
       <br>
   
@@ -67,13 +77,13 @@
     <mat-sidenav-content><!-- zona de mostrar los componentes -->
       <!--pagina con sidenav--><!-- las cosas de inicio -->
       <!-- inicio -->
+      <mat-card-content class="boxmod" *ngIf="selectorComponente != 3">
+        <mat-card-title>Inicio</mat-card-title>
+      </mat-card-content>
 
-      <!-- mirar el tema de estilos de este componente mas adelante -->
-      <mat-card class="boxmod">
-        <mat-card-title>
-          Inicio
-        </mat-card-title>
-      </mat-card>
+
+      <!-- Perfil -->
+      <app-perfil *ngIf="selectorComponente == 3" [usuarioPerfil]="usuarioSelectLogged"></app-perfil>
 
     </mat-sidenav-content>
   </mat-sidenav-container>

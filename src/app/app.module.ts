@@ -30,7 +30,9 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { HttpClientModule } from '@angular/common/http';
 import { PoliticaPrivComponent } from './politica-priv/politica-priv.component';
 import { AppInicioComponent } from './app-inicio/app-inicio.component';  // Http para servicios
-import { AuthGuardService } from './servicios/auth-guard.service';       // Autentificacion usuarios
+import { AuthGuardService } from './servicios/auth-guard.service';
+import { PerfilComponent } from './perfil/perfil.component';
+import { PerfilEntComponent } from './perfil-ent/perfil-ent.component';       // Autentificacion usuarios
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { AuthGuardService } from './servicios/auth-guard.service';       // Aute
     LoginComponent,
     RegistroComponent,
     PoliticaPrivComponent,
-    AppInicioComponent
+    AppInicioComponent,
+    PerfilComponent,
+    PerfilEntComponent
   ],
   imports: [
     BrowserModule,

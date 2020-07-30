@@ -58,6 +58,9 @@ export class RegistroComponent implements OnInit {
   usersAny: any[] = [];
   idUsu: number;  // comprobar si hay usuario creado
 
+  // Variable string para la respuesta de la api en java en el registro
+  respStringJava: string;
+
   // variables fecha, fechas limite para la fecha de nacimiento
   // tipo number
   fechaAnyoMaxNum = Number(new Date().getFullYear().toString()); // anyo de hoy
@@ -196,23 +199,31 @@ export class RegistroComponent implements OnInit {
 
           resp => {
 
+            // tslint:disable-next-line:no-string-literal
+            this.respStringJava = resp['respuesta'];
+
             // comprobacion de la respuesta al crear el usuario,
             // manejamos las respuestas de la API
-            if (resp.toString() === '') {
+
+            // if (resp.toString() === '') { // if para la api en C#
+            if (this.respStringJava === '') { // if para java
               this.tipoErrorString = 'Problemas de conexión con el servidor';
               this.usuarioCorrectoRegistrarse = false;
 
-            } else if (resp.toString() === 'Usuario insertado') {
+            // } else if (resp.toString() === 'Usuario insertado') {
+            } else if (this.respStringJava === 'Usuario insertado') {
               this.tipoErrorString = '';
               this.usuarioCorrectoRegistrarse = true;
 
               this.irAlInicio();  // ir al inicio
 
-            } else if (resp.toString() === 'Problemas, usuario no insertado') {
+            // } else if (resp.toString() === 'Problemas, usuario no insertado') {
+            } else if (this.respStringJava === 'Problemas, usuario no insertado') {
               this.tipoErrorString = 'Problemas de registro, el email o usuario coinciden con uno ya registrado';
               this.usuarioCorrectoRegistrarse = false;
 
-            } else if (resp.toString() === 'Usuario vacio') {
+            // } else if (resp.toString() === 'Usuario vacio') {
+            } else if (this.respStringJava === 'Usuario vacio') {
               this.tipoErrorString = 'Problemas de registro, hay que completar los campos obligatorios';
               this.usuarioCorrectoRegistrarse = false;
 
@@ -221,7 +232,8 @@ export class RegistroComponent implements OnInit {
               this.usuarioCorrectoRegistrarse = false;
             }
 
-            this.tipoErrorString = resp.toString();
+            // this.tipoErrorString = resp.toString(); // Para la api en C#
+
           }
         );
 

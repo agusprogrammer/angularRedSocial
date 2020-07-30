@@ -1,0 +1,71 @@
+mat-card {
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+
+/* Longitud del componente*/
+.longComponent {
+    height: 100%; /* 1000px */
+}
+
+/* Header img*/
+
+.cabeceraImagen {
+    height: 200px;
+    width: auto;
+    margin-bottom: 0;
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.imgperfil {
+    margin: 100px;
+    width: 100px;
+    height: 190px;
+    vertical-align: center;
+    float: left;
+}
+
+.imgProtada {
+    width: auto;
+    height: 200px;
+}
+
+/*
+.headerCard {
+    vertical-align: top;
+}
+*/
+
+
+/* contenido */
+
+@media (min-width: 800px){
+    .barraInfo {
+        float: left;
+        width: 35%;
+    }
+
+    .zonaPublicaciones {
+        float: right;
+        width: 65%;
+    }
+
+    .seccionEntrada {
+        height: 200px;
+    }
+}
+
+@media (max-width: 799px){
+    .seccionEntrada {
+        height: 100px;
+    }
+}
+
+
+
+
+

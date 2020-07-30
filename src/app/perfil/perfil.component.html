@@ -1,0 +1,124 @@
+<div class="longComponent">
+    <!-- Cabecera -->
+
+    <!--
+    <div class="cabeceraImagen">
+      <img src="{{usuarioPerfil.fotoPerfil}}" alt="Imagen de perfil" class="imgPerfil">
+      <img src="{{usuarioPerfil.fotoPortada}}" alt="Imagen de portada" class="imgPortada">
+    </div>-->
+    
+    <mat-card class="headerCard">
+      <mat-card-header>
+
+        <!--
+        <img src="{{usuarioPerfil.fotoPerfil}}" alt="Imagen de perfil" class="imgPerfil">
+        <img src="{{usuarioPerfil.fotoPortada}}" alt="Imagen de portada" class="imgPortada">
+        -->
+
+        <mat-card-title>Nombre: {{usuarioPerfil.nombre}}</mat-card-title>
+        <mat-card-subtitle>Nombre de usuario: {{usuarioPerfil.nombreUsu}}</mat-card-subtitle>
+        
+        <!--<p>Estado: {{usuarioPerfil.estado}}</p>--> <!-- Frase que se muestra a los de fuera -->
+        <!--<p>Numero de visitas: {{usuarioPerfil.numVisitas}}</p>-->
+
+      <!-- subir fotos -->
+      </mat-card-header>
+      <mat-card-content><!-- convertir en componente, se va a usar en varios lugares de la aplicacion-->
+        <div>
+          <form [formGroup]="formularioImgsPerfil" (change)="onUploadFotos(formularioImgsPerfil.value, $event)">
+            <input type="file" accept=".png, .jpg, .gif" formControlName="fotoPerfilFCNperfil">
+          </form>
+        </div>
+        <!--
+        <form [formGroup]="formularioImgPerfil" (change)="onUploadFotos(formularioImgPerfil.value, $event)">
+          <mat-form-field>
+            <mat-label>
+              Foto de perfil
+            </mat-label>
+            <input matInput type="file" accept=".png, .jpg, .gif" formControlName="fotoPerfilFCNperfil">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>
+              Foto de portada
+            </mat-label>
+            <input matInput type="file" accept=".png, .jpg, .gif" formControlName="fotoPortadaFCNperfil">
+          </mat-form-field>
+        </form>
+        -->
+        
+        <!--
+        <form>
+          <mat-form-field class="form-group">
+            <mat-label>Actualizar foto perfil</mat-label>
+            <input matInput type="file" accept=".png, .jpg, .gif" formControlName="fotoPerfilFCNperfil" (change)="onUploadFPerfil($event)">
+            
+            <mat-label>Actualizar foto portada</mat-label>
+            <input matInput type="file" accept=".png, .jpg, .gif" formControlName="fotoPortadaFCNperfil" (change)="onUploadFPortada($event)">
+
+          </mat-form-field>
+        </form>
+        -->
+
+        <!--
+        <button mat-button type="file" accept=".png, .jpg, .gif" (change)="onUploadFPerfil($event)">foto perfil</button>
+        <br>
+        <button mat-button type="file" accept=".png, .jpg, .gif" (change)="onUploadFPortada($event)">foto portada</button>
+        <br>
+        -->
+        
+      </mat-card-content>
+    </mat-card>
+
+
+    <div class="barraInfo">
+    <!-- Datos personales (los que recogemos del usuario) -->
+    <mat-card class="datosCard">
+      <mat-card-title>Datos usuario</mat-card-title>
+      <mat-card-content>
+
+        <p>Nombre: {{usuarioPerfil.nombre}}</p>
+        <p>Apellidos: {{usuarioPerfil.apellidos}}</p>
+        <p>Fecha de nacimiento: {{usuarioPerfil.fechaNacimiento}}</p>
+
+        <p>Nombre de usuario: {{usuarioPerfil.nombreUsu}}</p>
+        <p>Fecha de alta: {{usuarioPerfil.fechaAlta}}</p><!-- poner si eso los anyos que esta en la plataforma -->
+        <p>Fecha de ultimo login: {{usuarioPerfil.fechaUltLogin}}</p>
+
+        <p>Pais: {{usuarioPerfil.pais}}</p>
+        <p>Ciudad: {{usuarioPerfil.ciudad}}</p>
+        <p>Region: {{usuarioPerfil.region}}</p>
+        <p>Email: {{usuarioPerfil.email}}</p>
+        <p>telefono: {{usuarioPerfil.telefono}}</p>
+        
+      </mat-card-content>
+    </mat-card>
+    
+    <!-- fotos -->
+    <mat-card>
+      <mat-card-title>Fotos</mat-card-title>
+    </mat-card>
+
+    <!-- videos -->
+    <mat-card>
+      <mat-card-title>videos</mat-card-title>
+    </mat-card>
+    </div>
+
+    <div class="zonaPublicaciones">
+    <!-- Entradas -->
+    <mat-card class="seccionEntrada">
+      <mat-card-title>Entradas</mat-card-title>
+      <app-perfil-ent></app-perfil-ent>
+    </mat-card>
+
+    <!-- Publicaciones -->
+    <mat-card>
+      <mat-card-title>Publicaciones</mat-card-title>
+    </mat-card>
+
+    </div>
+
+
+</div>
+
+
