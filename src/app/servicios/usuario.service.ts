@@ -24,10 +24,9 @@ export class UsuarioService {
 
   }
 
-  // obtener usuario por login
-  getUserLogin(emailEntrada: string, password: string): Observable<any> {
-    // return this.http.get('http://localhost:50139/api/UsuarioApi/' + emailEntrada + '/' + password);
-    return this.http.get('http://localhost:9191/loginUsuario/' + emailEntrada + '/' + password);
+  // obtener todos los usuarios
+  getAllUsers(): Observable<any> {
+    return this.http.get('http://localhost:9191/usuarios');
   }
 
   // registrar usuario
@@ -122,8 +121,89 @@ export class UsuarioService {
     */
 
     // Para java spring boot
-    return this.http.delete('http://localhost:9191/' + id);
+    return this.http.delete('http://localhost:9191/deleteUsuario/' + id);
 
+  }
+
+
+  // Metodos propios --------------------------------
+
+  // obtener usuario por login
+  getUserLogin(emailEntrada: string, password: string): Observable<any> {
+    // return this.http.get('http://localhost:50139/api/UsuarioApi/' + emailEntrada + '/' + password);
+    return this.http.get('http://localhost:9191/loginUsuario/' + emailEntrada + '/' + password);
+  }
+
+  // Parte para buscar nuevos usuarios (buscar amigos)
+
+  // buscar nuevos amigos
+  getNuevosAmigos(idUsu: number): Observable<any> {
+    return this.http.get('http://localhost:9191/getNuevosAmigos/' + idUsu);
+  }
+
+  // buscar nuevos amigos por pais
+  getNuevosAmigosPais(pais: string): Observable<any> {
+    return this.http.get('http://localhost:9191/getAmigosPais/' + pais);
+  }
+
+  // buscar nuevos amigos por region
+  getNuevosAmigosRegion(region: string): Observable<any> {
+    return this.http.get('http://localhost:9191/getAmigosRegion/' + region);
+  }
+
+  // buscar nuevos amigos por ciudad
+  getNuevosAmigosCiudad(ciudad: string): Observable<any> {
+    return this.http.get('http://localhost:9191/getAmigosCiudad/' + ciudad);
+  }
+
+  // metodos para las imagenes del usuario y publicaciones -----------------------------------------
+  // imagen de perfil
+  getFotoPerfil(idUsu: number): Observable<any> {
+    return this.http.get('http://localhost:9191/getFotoPerfil/' + idUsu);
+  }
+
+  getFotoPerfilComment(idUsu: number): Observable<any> {
+    return this.http.get('http://localhost:9191/getFotoPerfil/' + idUsu);
+  }
+
+  postFotoPerfil(idUsu: number, fichFoto: File) {
+
+    const endpoint = 'http://localhost:9191/postFotoPerfil/' + idUsu;
+    const formData: FormData = new FormData();
+    formData.append('file', fichFoto);
+
+    return this.http.post(endpoint, formData);
+
+  }
+
+  deleteFotoPerfilUsu(idUsu: number): Observable<any> {
+    return this.http.delete('http://localhost:9191/deleteFotoPerfilUsu/' + idUsu);
+  }
+
+  // metodo general get
+  // metodo general get ---------------------------------------------------------
+  getUsuVariasUrl(url: string): Observable<any> {
+    return this.http.get(url);
+  }
+
+  // -------------------------------------------------------------------------------
+  // imagen de portada
+  getFotoPortada(idUsu: number): Observable<any> {
+    return this.http.get('http://localhost:9191/getFotoPortada/' + idUsu);
+  }
+
+  postFotoPortada(idUsu: number, fichFoto: File) {
+
+    const endpoint = 'http://localhost:9191/postFotoPortada/' + idUsu;
+    const formData: FormData = new FormData();
+    formData.append('file', fichFoto);
+
+    return this.http.post(endpoint, formData);
+
+  }
+
+  deleteFotoPortadaUsu(idUsu: number): Observable<any> {
+    return this.http.delete('http://localhost:9191/deleteFotoPortadaUsu/' + idUsu);
   }
 
 }

@@ -7,6 +7,8 @@ import { Subject } from 'rxjs';
 })
 export class PasarUsuarioService {
 
+   /* borrar este servicio sino se utiliza */
+
   // este servicio permite la comunicacion usandolo mediante ruta
   // servicio creado para pasar objetos de usuario entre las partes de la aplicacion
   usu: UsuarioModel;

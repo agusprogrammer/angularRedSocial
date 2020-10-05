@@ -12,21 +12,41 @@ import { UsuarioService } from '../servicios/usuario.service';
 export class AppInicioComponent implements OnInit {
 
   // Variables
-  sidenavOpen: boolean;    // abre o cierra el sidenav
-  idUsuLoginString: string;
-  idUsuLogin: number;
-  selectorComponente: number; // selecciona el componente a mostrar
+  public sidenavOpen: boolean;      // abre o cierra el sidenav
+  private idUsuLoginString: string; // variable string que recoge el id de la ruta
+  private idUsuLogin: number;       // variable numero que viene de idUsuLoginString para recoger los datos del usuario
+  public selectorComponente: number;       // selecciona el componente a mostrar segun se pulse un boton u otro del sidenav
 
   // usuario obtenido
-  usersAny: any[] = [];
-  usuarioSelectLogged: UsuarioModel; // usuario obtenido loggeado
+  private usersAny: any[] = [];   // variable any para recoger el usuario obtenido
+  public usuarioSelectLogged: UsuarioModel; // usuario obtenido loggeado
+  public cualquierUsuario: UsuarioModel; // usuario vacio para las publicaciones de varios usuarios
 
-  // comunicacion entre componentes
-  // Aqui van las variables de inputs y outputs
+  // estas url se usan para los servicios de publicaciones y contactos
+  // al pasar estas url entre componentes permite utilizar un solo metodo
+  // de servicio para varias url permitiendo ahorrar codigo en los servicios
+  // en algunos casos que se utiliza el get
 
+  // urls componente publicaciones
+  public urlPublInicio: string;   // Variable de string para url de publicaciones de inicio
+  public urlPublExplorar: string; // Variable de string para url de publicaciones de explorar
+
+  // urls componente contactos
+  public urlContactAmigos: string;        // Variable de string para url de los contactos amigos
+  public urlContactBuscarAmigos: string;  // Variable de string para url de los contactos de buscar amigos nuevos
+
+  // Nota: en el futuro se pondra compodoc para la documentacion de proyecto
+  /**
+   * constructor del componente
+   * @param routeActivate ruta por la cual nos viene el id del usuario que ha hecho loggin
+   * @param router  ruta para salir del loggeo
+   * @param usuServ inyeccion del servicio para los datos de usuario que se ha loggeado
+   */
   constructor(private routeActivate: ActivatedRoute, private router: Router, private usuServ: UsuarioService) { }
 
-
+  /**
+   * Inicio del componente de inicio
+   */
   ngOnInit() {
     this.sidenavOpen = false;
 
@@ -38,13 +58,32 @@ export class AppInicioComponent implements OnInit {
 
     // cuando se inicia el componente de inicio, obtiene el usuario que ha accedido
     this.buscarUsuarioId();
+    this.configuracionUrl();
 
     this.selectorComponente = 1;
 
   }
 
-  // muestra sideNav
-  muestraSideNav() {
+  /**
+   * metodo para configurar las url de los servicios para obterner los datos desde una ruta u otra
+   */
+  private configuracionUrl() {
+
+    // configuracion del usuario para las listas de publicaciones de varios usuarios
+    // se usa un usuario vacio para indicar que las publicaciones del componente son de varios usuarios
+    this.cualquierUsuario = new UsuarioModel();
+
+    this.urlPublInicio = 'http://localhost:9191/getPubliInicioUsuario/'; // + this.usuarioSelectLogged
+    this.urlPublExplorar = 'http://localhost:9191/getPubliPubl';
+
+    this.urlContactAmigos = 'http://localhost:9191/getAmigosUsu/' + this.usuarioSelectLogged.idUsu;
+    this.urlContactBuscarAmigos = 'http://localhost:9191/getNuevosAmigos/' + this.usuarioSelectLogged.idUsu;
+  }
+
+  /**
+   * metodo para mostrar u ocultar el sidenav
+   */
+  public muestraSideNav() {
 
     if (this.sidenavOpen === true) {
       this.sidenavOpen = false;
@@ -55,18 +94,29 @@ export class AppInicioComponent implements OnInit {
 
   }
 
-  // Salir de la aplicacion
-  salirAplicacion() {
+  /**
+   * metodo (evento) para salir a la pantalla de login de la aplicacion
+   */
+  public salirAplicacion() {
     this.router.navigate(['home/Network/login']);
   }
 
-  // metodo para seleccionar que componente se muestra en la interfaz
-  seleccionarComponente(numSelect: number) {
+  /**
+   * metodo (evento) para seleccionar que componente se muestra en la interfaz
+   * @example por ejemplo, el numero 3 le pertenece al perfil del usuario que se loggea, si se le pasa un 3 nos muestra el perfil de usuario
+   * @param numSelect cada componente del sidenav tiene un numero, este numero indica que componnente se muestra
+   */
+  public seleccionarComponente(numSelect: number) {
     this.selectorComponente = numSelect;
   }
 
+  // la parte de actualizar el login con el servicio se pondra en el futuro
   // Nota: actualizar la fecha del ultimo login
   // obtener usuario que ha accedido por login
+
+  /**
+   * metodo para obtener el usuario loggeado
+   */
   private buscarUsuarioId() {
 
     this.usuServ.getUserId(this.idUsuLogin).subscribe(
@@ -145,6 +195,8 @@ export class AppInicioComponent implements OnInit {
 
         // tslint:disable-next-line:no-string-literal
         this.usuarioSelectLogged.fotoPortada = this.usersAny['fotoPortada'];
+
+        this.configuracionUrl();
 
       }
     );

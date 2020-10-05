@@ -4,9 +4,12 @@ import { UsuarioService } from '../servicios/usuario.service';
 import { UsuarioModel } from '../modelos/UsuarioModel';
 import { Router } from '@angular/router';
 import { AuthGuardService } from '../servicios/auth-guard.service';
+import { FechaHoy } from '../objetos/FechaHoy';
 
 
-// Interface para el selector de paises
+/**
+ *  Interface para el selector de paises
+ */
 interface Pais {
   value: string;
   viewValue: string;
@@ -41,6 +44,9 @@ export class RegistroComponent implements OnInit {
 
   // variables para la fecha por defecto, sirven para
   // seleccionar la fecha del primer registro
+  fechaRegistro: FechaHoy;
+
+  /*
   fechaAnyoReg: number;
   fechaDiaReg: number;
   fechaMesReg: number;
@@ -48,6 +54,8 @@ export class RegistroComponent implements OnInit {
   fechaMinReg: number;
   fechaSecReg: number;
   fechaRegLogin: Date;
+  */
+
   // fecha del primer registro y login en la plataforma
 
   // variables checkbox opciones de privacidad y politica de privacidad
@@ -70,8 +78,17 @@ export class RegistroComponent implements OnInit {
   fechaMax = new Date(this.fechaAnyoMinEntradaNum, this.fechaMes, this.fechaDia);
 
 
+  /**
+   * Constructor del registro
+   * @param usuServ servicio de usuarios
+   * @param router rutas de la aplicacion
+   * @param auth authGuard
+   */
   constructor(private usuServ: UsuarioService, private router: Router, private auth: AuthGuardService) { }
 
+  /**
+   * metodo de inicio del componente del registro
+   */
   ngOnInit() {
 
     // este en principio es verdadero, si se envia el formulario de manera incorrecta
@@ -85,7 +102,8 @@ export class RegistroComponent implements OnInit {
     // inicializar comprobacion de repeticion de passwd
     this.passwdCorrecto = false;
 
-    this.fechaRegLogin = new Date();  // Fecha de registro, primer login
+    this.fechaRegistro = new FechaHoy(); // objeto para poner la fecha de hoy para el registro
+    // this.fechaRegLogin = new Date();  // Fecha de registro, primer login
 
     // Inicializar usuario
     this.usuarioRegistro = new UsuarioModel();
@@ -123,6 +141,10 @@ export class RegistroComponent implements OnInit {
 
   // Seleccionar la opcion de usar el email de entrada
   // distinto del email para mostrar en la plataforma
+  /**
+   * evento para seleccionar un email distinto al de entrada para mostrar en la plataforma
+   * @param $event evento
+   */
   public emailContactDistinto($event) {
 
     if (this.usarEmailContact === false) {
@@ -133,12 +155,19 @@ export class RegistroComponent implements OnInit {
 
   }
 
-  // volver atras
+  /**
+   * evento para volver atras
+   * @param $event evento
+   */
   public volverAtras($event) {
     this.router.navigate(['home/Network/login']);
   }
 
-  // Registrar usuario
+  /**
+   *  Registrar usuario
+   * @param formValue valores del formulario
+   * @param $event evento
+   */
   public onSubmmit(formValue: any, $event) {
 
     // comprobar que acepta la politica de privacidad
@@ -174,9 +203,9 @@ export class RegistroComponent implements OnInit {
 
 
         if (this.perfilPrivadoBool === false) {
-          this.usuarioRegistro.perfilPrivado = 0;
+          this.usuarioRegistro.perfilPrivado = 0; // 0
         } else {
-          this.usuarioRegistro.perfilPrivado = 1;
+          this.usuarioRegistro.perfilPrivado = 1; // 1
         }
 
         // como ya se comprueba mediante un if, este valor se pone por defecto
@@ -191,8 +220,8 @@ export class RegistroComponent implements OnInit {
         // Estado, se configura en el perfil
         this.usuarioRegistro.numVisitas = 0;
         // fecha ultimo login, por defecto, poner dia que se registra
-        this.usuarioRegistro.fechaUltLogin = this.fechaPrimerLoginRegistro();
-        this.usuarioRegistro.fechaAlta = this.fechaPrimerLoginRegistro();
+        this.usuarioRegistro.fechaUltLogin = this.fechaRegistro.fechaHoraActual(); // antes this.fechaPrimerLoginRegistro();
+        this.usuarioRegistro.fechaAlta = this.fechaRegistro.fechaHoraActual();
         // --------------------------------------
 
         this.usuServ.postUser(this.usuarioRegistro).subscribe(
@@ -255,7 +284,10 @@ export class RegistroComponent implements OnInit {
 
   }
 
-  // Metodos que nos lleva al inicio despues de registrarnos
+
+  /**
+   * Metodo que nos lleva al inicio despues de registrarnos
+   */
   private irAlInicio() {
     this.usuServ.getUserLogin(this.usuarioRegistro.emailEntrada, this.usuarioRegistro.contrasenya).subscribe(
       data => {
@@ -275,7 +307,10 @@ export class RegistroComponent implements OnInit {
 
   }
 
-  // comprobar que la contrasenya es igual en ambos campos
+  /**
+   * comprobar que la contrasenya es igual en ambos campos
+   * @param formValue recogemos datos del formulario
+   */
   private comprobarPasswd(formValue: any) {
 
     this.passwdCorrecto = false;
@@ -290,27 +325,10 @@ export class RegistroComponent implements OnInit {
 
   }
 
-  // poner fecha por defecto del primer login despues del registro
-  // tambien se usa como la fecha de alta
-  private fechaPrimerLoginRegistro(): Date {
-    // variables fecha, fechas limite para la fecha de nacimiento
-    // tipo number
-
-    this.fechaAnyoReg = Number(new Date().getFullYear().toString()); // anyo de hoy
-    this.fechaDiaReg = Number(new Date().getDate().toString());      // dia (Nota: day es num dia de semana)
-    this.fechaMesReg = Number(new Date().getMonth().toString());     // mes
-
-    this.fechaHoraReg = Number(new Date().getHours().toString());
-    this.fechaMinReg = Number(new Date().getMinutes().toString());
-    this.fechaSecReg = Number(new Date().getSeconds().toString());
-
-    this.fechaRegLogin = new Date(this.fechaAnyoReg, this.fechaMesReg, this.fechaDiaReg, this.fechaHoraReg, this.fechaMinReg, this.fechaSecReg);
-
-    return this.fechaRegLogin;
-
-  }
-
-  // Evento que cambia la opcion de si ponemos el perfil privado o publico
+  /**
+   * Evento que cambia la opcion de si ponemos el perfil privado o publico
+   * @param $event evento
+   */
   public esPerfilPrivado($event) {
 
     if (this.perfilPrivadoBool === false) {
@@ -322,7 +340,10 @@ export class RegistroComponent implements OnInit {
 
   }
 
-  // evento que indica si la politica de privacidad es aceptada por el usuario
+  /**
+   * evento que indica si la politica de privacidad es aceptada por el usuario
+   * @param $event evento
+   */
   public aceptaPoliticaPriva($event) {
 
     if (this.aceptaPolPriva === false) {

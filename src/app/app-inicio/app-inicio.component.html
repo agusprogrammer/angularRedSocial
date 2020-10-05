@@ -1,28 +1,28 @@
 <div>
 
-<!-- toolbar -->
-<div>
+  <!-- toolbar -->
+  <div>
 
   <mat-toolbar color='primary'>
     
-    <!-- poner if mostrar boton sidenav cuando este logueado-->
-      <!-- pasar valor para abrir sidenav-->
-  
-    <mat-toolbar-row><!-- *ngIf="usuLoginBool" -->
+    <mat-toolbar-row>
+
       <!-- boton sidenav-->
-      <button mat-icon-button color="" aria-label="Menu" class="botonIcono" (click)="muestraSideNav()">
+      <button mat-icon-button color="" aria-label="Menu" (click)="muestraSideNav()">
         <mat-icon>menu</mat-icon>
       </button>
       
       <span>Network</span>
+      <span class="espaciadoToolbar"></span>
+      <button mat-button class="btnSalir" (click)="salirAplicacion()">Salir</button>
   
     </mat-toolbar-row>
   </mat-toolbar>
   
   <div>
 
-<!-- sidenav menu -->
-<div class="contenidoNav">
+  <!-- sidenav menu -->
+  <div class="contenidoNav">
   <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side" [(opened)]="sidenavOpen">
       
@@ -30,23 +30,21 @@
       <button class="btnSideNav" mat-button  (click)="seleccionarComponente(1)">Inicio</button>
       <br>
 
-      <!-- Publicaciones publicas por orden de 
-        fecha de toda la red (Coger solo las ultimas, las demas se cargan mediante boton)-->
+      <!-- Publicaciones publicas -->
       <button class="btnSideNav" mat-button  (click)="seleccionarComponente(2)">Explorar Publicaciones</button>
       <br>
       
       <!-- nuestro perfil donde ponemos nuestras entradas y publicaciones -->
-      <!-- Podemos tener unos componentes para mostrar imagenes y videos -->
-      <!-- Enlace a mostrar nuestros amigos --> 
       <button class="btnSideNav" mat-button (click)="seleccionarComponente(3)">Perfil</button>
       <br>
         
-      <!-- Permite subir fotos y videos -->
+      <!-- gestion de fotos -->
       <button class="btnSideNav" mat-button  (click)="seleccionarComponente(4)">Fotos</button>
       <br>
-  
-      <button class="btnSideNav" mat-button  (click)="seleccionarComponente(5)">Videos</button>
-      <br>
+      
+      <!-- Esta parte se realizara mas adelante -->
+      <!-- <button class="btnSideNav" mat-button  (click)="seleccionarComponente(5)">Videos</button> -->
+      <!-- <br> -->
       
       <!-- Peticiones de amistad tanto recibidas como hechas -->
       <button class="btnSideNav" mat-button  (click)="seleccionarComponente(6)">Peticiones Amistad</button>
@@ -74,22 +72,69 @@
       <br>
   
     </mat-sidenav>
-    <mat-sidenav-content><!-- zona de mostrar los componentes -->
-      <!--pagina con sidenav--><!-- las cosas de inicio -->
+    <mat-sidenav-content>
+      <!-- zona de mostrar los componentes -->
+      <!-- pagina con sidenav-->
       <!-- inicio -->
-      <mat-card-content class="boxmod" *ngIf="selectorComponente != 3">
-        <mat-card-title>Inicio</mat-card-title>
-      </mat-card-content>
+      
+      <div *ngIf="selectorComponente == 1">
+        <h1>Inicio</h1>
+        <p>Aquí se muestran las publicaciones de tus amigos</p>
+        <app-publicaciones [usuarioLogged]="usuarioSelectLogged" [usuarioVisita]="usuarioSelectLogged" [urlGetPubl]="urlPublInicio"></app-publicaciones>
+      </div>
 
-
+      <!-- Publicaciones publicas -->
+      <div *ngIf="selectorComponente == 2">
+        <h1>Explorar Públicaciones</h1>
+        <p>Aquí se muestran las públicaciones públicas de toda la comunidad</p>
+        <app-publicaciones [usuarioLogged]="usuarioSelectLogged" [usuarioVisita]="usuarioSelectLogged" [urlGetPubl]="urlPublExplorar"></app-publicaciones>
+      </div>
+      
       <!-- Perfil -->
-      <app-perfil *ngIf="selectorComponente == 3" [usuarioPerfil]="usuarioSelectLogged"></app-perfil>
+      <app-perfil *ngIf="selectorComponente == 3" [usuarioPerfil]="usuarioSelectLogged" [usuarioVisita]="usuarioSelectLogged"></app-perfil>
+
+      <app-gestion-img *ngIf="selectorComponente == 4" 
+      [usuarioLogged]="usuarioSelectLogged" [usuarioVisita]="usuarioSelectLogged"></app-gestion-img>
+
+      <!-- videos, mirar en el futuro
+      <app-gestion-vid *ngIf="selectorComponente == 5"
+      [usuarioLogged]="usuarioSelectLogged" [usuarioVisitaVids]="usuarioSelectLogged"></app-gestion-vid>
+      -->
+
+      <!-- peticiones de amistad -->
+      <div *ngIf="selectorComponente == 6">
+        <h1>Peticiones de amistad</h1>
+        <p>Aqui se muestran las peticiones de amistad</p>
+        <app-peticiones [usuarioLogged]="usuarioSelectLogged"></app-peticiones>
+      </div>
+
+      <!-- amigos -->
+      <div *ngIf="selectorComponente == 7">
+        <h1>Amigos</h1>
+        <app-contactos [usuarioLogged]="usuarioSelectLogged" [urlGetContactos]="urlContactAmigos"></app-contactos>
+      </div>
+
+      <!-- buscar amigos -->
+      <div *ngIf="selectorComponente == 8">
+        <h1>Buscar amigos</h1>
+        <app-contactos [usuarioLogged]="usuarioSelectLogged" [urlGetContactos]="urlContactBuscarAmigos"></app-contactos>
+      </div>
+
+      <!-- opciones -->
+      <div *ngIf="selectorComponente == 9">
+        <h1>Opciones</h1>
+        <p>apartado de opciones de usuario, modificar datos, borrar cuenta ...</p>
+      </div>
+
+      <!-- ayuda -->
+      <div *ngIf="selectorComponente == 10">
+        <h1>Ayuda</h1>
+        <p>ademas de la ayuda, incluye un enlace a la politica de privacidad</p>
+      </div>
 
     </mat-sidenav-content>
   </mat-sidenav-container>
-</div>
-
-  
+  </div>
 
 </div>
 

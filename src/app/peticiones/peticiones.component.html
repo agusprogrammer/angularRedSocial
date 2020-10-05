@@ -1,0 +1,35 @@
+<div class="largo">
+
+  <mat-tab-group>
+    <mat-tab label="Recibidas">
+
+      <mat-card *ngFor="let cardReciv of dataCardReciv">
+        <mat-card-header>
+          <img mat-card-avatar [src]="cardReciv.usuarioFoto || 'assets/imgApp/no-imagen.jpg'">
+          <mat-card-title>{{cardReciv.usuario.nombreUsu}}</mat-card-title>
+          <mat-card-subtitle>{{cardReciv.usuario.nombre}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" class="marginBoton" (click)="aceptarPeticion(cardReciv.usuario)">Aceptar</button>
+          <button mat-raised-button color="warn" class="marginBoton" (click)="cancelarPeticionRecibida(cardReciv.usuario)">Rechazar</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </mat-tab>
+    <mat-tab label="Pendientes">
+
+      <mat-card *ngFor="let cardPend of dataCardPendientes">
+        <mat-card-header>
+          <img mat-card-avatar [src]="cardPend.usuarioFoto || 'assets/imgApp/no-imagen.jpg'">
+          <mat-card-title>{{cardPend.usuario.nombreUsu}}</mat-card-title>
+          <mat-card-subtitle>{{cardPend.usuario.nombre}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-raised-button color="warn" class="marginBoton" (click)="cancelarPeticionEnviada(cardPend.usuario)">Cancelar</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

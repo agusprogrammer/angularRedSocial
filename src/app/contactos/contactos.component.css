@@ -1,0 +1,15 @@
+/* card donde se muestran los contactos */
+mat-card {
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+
+/* estilo del margen del boton para volver atras */
+.btnVolverAtras {
+    
+    margin-top: 50px;
+    margin-left: 50px;
+
+}

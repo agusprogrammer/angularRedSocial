@@ -1,4 +1,4 @@
-
+/* estilo del mat-card */
 .boxmod {
     width: auto;
     height: auto;
@@ -6,20 +6,24 @@
     padding: 20px;
 }
 
+/* estilo del toolbar del login */
 .toolbarClass {
     width: auto;
     height: 150px;
 }
 
+/* estilo del margen para los botones*/
 button {
     margin-top: 10px;
     margin-right: 20px;
 }
 
+/* estilo de los enlaces */
 a {
     margin-top: 10px;
 }
 
+/* estilo de los textos de los errores*/
 .mat-body-1 {
     margin-left: 15px;
     color: red;

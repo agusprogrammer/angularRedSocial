@@ -6,6 +6,6 @@ export class AmigosUsuModel {
     usuAmIdSolicitante: UsuarioModel;
     usuAmIdReceptor: UsuarioModel;
     fechaEnviada: Date; // fecha que se envio la peticion
-    solicitudAceptada: boolean;
+    solicitudAceptada: number;
     // si es true son amigos, si es false, pendiente, si se elimina es que se rechazo
 }

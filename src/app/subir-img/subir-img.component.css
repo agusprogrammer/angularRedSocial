@@ -1,0 +1,54 @@
+/*Se aplica al texto que le precede*/
+/*
+.btnSubArch {
+
+	border-radius: 6px;
+	background-color: #303F9F;
+	color: white;
+	padding: 10px;
+
+}
+*/
+
+.boxMod {
+	width: auto;
+}
+
+.btnSubArch {
+	font-family: Arial, Helvetica, sans-serif;
+	color: gray;
+}
+
+/*Se aplica al boton*/
+input[type=file]::-webkit-file-upload-button {
+    /* border: 1px solid grey; */
+    background-color: #3F51B5; /*colores: #3F51B5, #303F9F, #283593*/
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 700;
+	border-radius: 4px;
+	padding: 10px;
+	border-style: none;
+	outline: none;
+	/*box-shadow: 0px 10px 0px 0px gray; */
+	-webkit-box-shadow: 0px 1px 1px 0px gray;
+	-moz-box-shadow: 0px 1px 1px 0px gray;
+	box-shadow: 0px 1px 1px 0px gray;
+	cursor: pointer;
+}
+
+.imagenSubida {
+	width: 50px;
+	height: 50px;
+}
+
+
+/*
+.btnSubArch + .labelInputArch {
+    background-color: #303F9F;
+    color: white;  
+    display: inline-block;
+}
+*/
+
+

@@ -18,12 +18,21 @@ export class UsuarioModel {
     esAdministrador: number;
     usuarioActivo: number;
     usuarioBaneado: number; // castigo para el usuario
-    fechaFinBaneo: number; // castigo para el usuario
+    fechaFinBaneo: Date; // castigo para el usuario
     estado: string;        // Cosas de la cuenta
     numVisitas: number;
     fechaUltLogin: Date;   // dateTime
-    fotoPerfil: Blob;    // ver si eso mas adelante el file upload y la imagenes
-    fotoPortada: Blob;
+
+    // fotoPerfil: Blob;
+    fotoPerfil: string;     // foto perfil
+    // fotoPerfilFile: File;
+
+    // fotoPortada: Blob;
+    fotoPortada: string;    // foto portada
+    // fotoPortadaFile: File;
+
+    // fotoPerfil: Blob;    // ver si eso mas adelante el file upload y la imagenes
+    // fotoPortada: Blob;
 }
 
 // Nota: como no hay dateTime en angular se usa Date

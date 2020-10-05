@@ -1,0 +1,19 @@
+<div class="boxMod">
+  <p class="btnSubArch">Selecciona una imagen del tipo .png, .jpg, .gif, .bmp o .svg</p>
+
+  <form [formGroup]="formularioImgs" (change)="onUploadFotos(formularioImgs.value, $event)">
+    <input class="btnSubArch" type="file" accept=".png, .jpg, .gif, .bmp, .svg" formControlName="fotoFCN">
+  </form> 
+
+  <!--
+  <form method="POST" enctype="multipart/form-data" action="http://localhost:9191/addArchivoFoto">
+    <input class="btnSubArch" type="file" accept=".png, .jpg, .gif, .bmp, .svg" formControlName="fotoFCN">
+    <br>
+    <button mat-raised-button type="submit" color="primary">Subir</button>
+  </form>
+  -->
+
+  <br>
+  <img [src]="imgView || 'assets/imgApp/no-imagen.jpg'" mat-card-image alt="sin imagen" class="imagenSubida">
+  
+</div>

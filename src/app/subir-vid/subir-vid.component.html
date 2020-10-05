@@ -1,0 +1,12 @@
+<div class="boxmod">
+  <p class="btnSubArchVid">Selecciona un video del tipo .mp4, .mkv, .flv, .avi, .wmv, .webm</p>
+  <form [formGroup]="formularioVids" (change)="onUploadVideos(formularioVids.value, $event)">
+    <input class="btnSubArchVid" type="file" accept=".mp4, .mkv, .flv, .avi, .wmv, .webm" formControlName="VideoFCN">
+  </form>
+  <br>
+  <img *ngIf="videoCargado == false" src="assets/imgApp/no-video.png" alt="sin imagen, video no cargado" class="videoNoSubido"/>
+  <!-- Nota: mirar como hacer un preview del video -->
+  <video class="videoSubida" *ngIf="videoCargado == true" [src]="videoView">
+    <code>Tu navegador no implementa videos en HTML 5</code>
+  </video>
+</div>

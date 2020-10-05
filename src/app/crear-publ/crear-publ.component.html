@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-title>Publicaciones</mat-card-title>
+
+  <mat-card-content>
+  <!-- solo accesible para el usuario logueado -->
+  <form *ngIf="usuModifica === true" [formGroup]="formulario" (submit)="onSubmmit(formulario.value, $event)">
+    <mat-form-field>
+      <mat-label>Titulo</mat-label>
+      <input matInput type="text" formControlName="tituloFCNCrearPubl">
+    </mat-form-field>
+    <br>
+
+    <mat-form-field class="inputLargo">
+      <mat-label>Texto</mat-label>
+      <textarea matInput formControlName="textoFCNCrearPubl"></textarea>
+    </mat-form-field>
+    <br>
+    <br>
+
+    <mat-slide-toggle formControlName="publPrivadaFCNPubl" (click)="publicacionPrivada($event)">Publicacion privada</mat-slide-toggle>
+    <br>
+    <br>
+
+    <button mat-raised-button type="submit" color="primary">Publicar</button>
+
+  </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,38 @@
+<div class="largo">
+
+  <div *ngIf="this.perfilVisitadoBool === false">
+
+  <mat-card *ngFor="let cardContact of obsContact | async">
+    <mat-card-header>
+      <img mat-card-avatar [src]="cardContact.usuarioFoto || 'assets/imgApp/no-imagen.jpg'" alt="sin imagen">
+      <mat-card-title>{{cardContact.usuario.nombreUsu}}</mat-card-title>
+      <mat-card-subtitle>{{cardContact.usuario.nombreUsu}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions *ngIf="cardContact.boolAmigo === true">
+      <!-- acciones en caso de ser amigos, visitar, quitar de amigos -->
+      <button mat-raised-button color="primary" (click)="visitarPerfil(cardContact.usuario)">Visitar</button>
+      <button mat-raised-button color="warn" (click)="cancelarAmistad(cardContact.usuario)">Cancelar amistad</button>
+    </mat-card-actions>
+    <mat-card-actions *ngIf="cardContact.boolAmigo === false">
+      <!-- acciones en caso de no ser amigos, visitar si es publico, enviar peticion amistad -->
+      <button mat-raised-button color="primary" *ngIf="cardContact.usuarioLog.esAdministrador === true || cardContact.usuario.perfilPrivado < 1" (click)="visitarPerfil(cardContact.usuario)">Visitar</button>
+      <button mat-raised-button color="primary" *ngIf="cardContact.boolAmigo === false" (click)="enviarPeticionAmistad(cardContact.usuario)">Enviar peticion</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-paginator
+    [length] = "numUsuarios"
+    [pageSize] = "5"
+    [pageSizeOptions] = "[1, 5, 10, 20, 30, 40, 50, 100, 150, 200]">
+  </mat-paginator>
+
+  </div>
+
+  <div *ngIf="this.perfilVisitadoBool === true">
+    <!-- boton de volver atras -->
+    <button mat-raised-button color="primary" (click)="visitarPerfil()" class="btnVolverAtras">Atras</button>
+    <app-perfil [usuarioPerfil]="perfilVisita" [usuarioVisita]="usuarioLogged"></app-perfil>
+  </div>
+
+</div>
+

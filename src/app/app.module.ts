@@ -26,13 +26,26 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { HttpClientModule } from '@angular/common/http';
 import { PoliticaPrivComponent } from './politica-priv/politica-priv.component';
 import { AppInicioComponent } from './app-inicio/app-inicio.component';  // Http para servicios
 import { AuthGuardService } from './servicios/auth-guard.service';
 import { PerfilComponent } from './perfil/perfil.component';
-import { PerfilEntComponent } from './perfil-ent/perfil-ent.component';       // Autentificacion usuarios
+import { PerfilEntComponent } from './perfil-ent/perfil-ent.component';
+import { SubirImgComponent } from './subir-img/subir-img.component';
+import { SubirVidComponent } from './subir-vid/subir-vid.component';
+import { AppDialogComponent } from './app-dialog/app-dialog.component';
+import { GestionImgComponent } from './gestion-img/gestion-img.component';
+import { GestionVidComponent } from './gestion-vid/gestion-vid.component';
+import { AppDialogSelectComponent } from './app-dialog-select/app-dialog-select.component';       // Autentificacion usuarios
+import { SafePipe } from './objetos/SafePiepe';
+import { CrearPublComponent } from './crear-publ/crear-publ.component';
+import { PublicacionesComponent } from './publicaciones/publicaciones.component';
+import { ContactosComponent } from './contactos/contactos.component';
+import { PeticionesComponent } from './peticiones/peticiones.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +55,18 @@ import { PerfilEntComponent } from './perfil-ent/perfil-ent.component';       //
     PoliticaPrivComponent,
     AppInicioComponent,
     PerfilComponent,
-    PerfilEntComponent
+    PerfilEntComponent,
+    SubirImgComponent,
+    SubirVidComponent,
+    AppDialogComponent,
+    GestionImgComponent,
+    GestionVidComponent,
+    AppDialogSelectComponent,
+    SafePipe,
+    CrearPublComponent,
+    PublicacionesComponent,
+    ContactosComponent,
+    PeticionesComponent                  // Agregamos la safe pipe
   ],
   imports: [
     BrowserModule,
@@ -66,13 +90,20 @@ import { PerfilEntComponent } from './perfil-ent/perfil-ent.component';       //
     MatSelectModule,
     MatDialogModule,
     MatSidenavModule,
-    MatStepperModule
+    MatStepperModule,
+    MatPaginatorModule,
+    MatTabsModule
   ],
   exports: [
     FormsModule,              // exportamos forms
     ReactiveFormsModule       // exportamos forms
   ],
   providers: [AuthGuardService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AppDialogComponent,   // componentes para los dialogos
+    AppDialogSelectComponent
+  ]
+
 })
 export class AppModule { }

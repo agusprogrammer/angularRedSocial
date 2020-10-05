@@ -6,5 +6,5 @@ export class PublicacionModel {
     tituloPublicacion: string;
     textoPublicacion: string;
     fechaCreacionPub: Date;
-    pubEsPrivada: number; // Boolean
+    pubEsPrivada: number; // Boolean number
 }

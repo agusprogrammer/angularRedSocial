@@ -1,0 +1,74 @@
+mat-card {
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+
+.margenDatos {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.marginBtnAct {
+    margin-left: 45px;
+    margin-right: 45px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* la parte de edicion se pondra en un futuro */
+.marginBtnEditar {
+    margin-left: 25px;
+    margin-bottom: 25px;
+    margin-top: 5px;
+}
+
+.marginBtnBorrar {
+    margin-left: 20px;
+    margin-bottom: 25px;
+    margin-top: 5px;
+}
+
+.marginBtnComentarios {
+    float: right;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    margin-top: 5px;
+}
+
+.infoPrivaColor {
+    margin-left: 25px;
+    color: gray;
+}
+
+.colorGray {
+    color: gray;
+    margin-right: 20px;
+}
+
+.textoPubl {
+    margin-left: 10px;
+}
+
+.listacomment {
+    margin-left: 20px;
+}
+
+.btnBorrarComment {
+    margin-bottom: 20px;
+}
+
+.marginBtnComent {
+    margin-left: 20px;
+}
+
+.longComponent {
+    height: 100vh;
+}
+
+.estiloComentario {
+    float: left;
+    margin-right: 20px;
+}
+

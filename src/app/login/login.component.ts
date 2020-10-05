@@ -1,17 +1,19 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { UsuarioService } from '../servicios/usuario.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioModel } from '../modelos/UsuarioModel';
 import { Router } from '@angular/router';
 import { AuthGuardService } from '../servicios/auth-guard.service';
 import { PasarUsuarioService } from '../servicios/pasar-usuario.service';
+import { AppDialogComponent } from '../app-dialog/app-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   // variables
   formulario: FormGroup;  // formulario
@@ -19,9 +21,19 @@ export class LoginComponent implements OnInit {
   idUsu: number;  // Comprobar si hay usuario, seleccionar id de usuario
   usuarioValido: boolean; // Indica si el usuario ha sido obtenido
 
-  constructor(private usuServ: UsuarioService, private router: Router, private auth: AuthGuardService) { }
+  /**
+   * Constructor del componente login
+   * @param usuServ servicio de usuarios
+   * @param dialog dialogo formulario login
+   * @param router router para las rutas
+   * @param auth authGuard para el login
+   */
+  constructor(private usuServ: UsuarioService, public dialog: MatDialog, private router: Router, private auth: AuthGuardService) { }
 
-  // iniciamos las variables del login
+
+  /**
+   * iniciamos las variables del login
+   */
   ngOnInit() {
 
     this.idUsu = 0;
@@ -35,15 +47,21 @@ export class LoginComponent implements OnInit {
 
   }
 
-  // Recoge los datos de los campos y nos recoge el usuario
+  /**
+   * Recoge los datos de los campos y nos recoge el usuario del formulario que se loggea
+   * @param formValue valores que se recogen del formulario
+   * @param event evento
+   */
   public onSubmmit(formValue: any, event) {
 
     const usuario = new UsuarioModel();
     usuario.emailEntrada = formValue.emailEntradaFCNLogin;
     usuario.contrasenya = formValue.passwordFCNLogin;
 
+
     // Recoger datos del servicio para ver los datos del usuario recogido
     this.usuServ.getUserLogin(usuario.emailEntrada, usuario.contrasenya).subscribe(
+
       data => {
         this.usersAny = data;
 
@@ -65,27 +83,33 @@ export class LoginComponent implements OnInit {
 
         }
 
-
       }
-    );
 
+    );
 
   }
 
-  // metodo para ir a registrar el usuario (cambiar)
+  /**
+   * metodo para ir a registrar el usuario mediante el route
+   * @param event evento
+   */
   public registrarUsu(event) {
     this.router.navigate(['home/Network/registro']);
 
   }
 
-  // Ir a la politica de privacidad
+  /**
+   * metodo para ir a la parte de politica de privacidad mediante el route
+   * @param event evento
+   */
   public politicaPrivacidad(event) {
     this.router.navigate(['home/Network/polPriva']);
 
   }
 
-  // destruir componente
-  // tslint:disable-next-line:use-life-cycle-interface
+  /**
+   * metodo para destruir componente y vaciar variables
+   */
   ngOnDestroy() {
     // poner variables por defecto
     this.formulario = new FormGroup({});

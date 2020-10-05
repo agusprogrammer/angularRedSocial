@@ -1,0 +1,12 @@
+/* card de crear publicaciones */
+mat-card {
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+
+/* clase para el width del input*/
+.inputLargo {
+    width: 100%;
+}

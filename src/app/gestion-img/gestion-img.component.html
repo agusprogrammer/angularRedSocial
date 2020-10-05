@@ -1,0 +1,96 @@
+<div class="longComponent">
+<mat-card class="matCardTop">
+  <mat-card-header>
+    <mat-card-title>Imagenes</mat-card-title>
+
+  </mat-card-header>
+  <mat-card-content>
+    <div class="ponerIzq">
+      <app-subir-img *ngIf="usuLogAdmin || usuAccedeSusFot" [usuarioLoggedSubImg]="usuarioLogged" (eventEmitirImg)="recibirFotoSubida($event)"></app-subir-img>
+      <br>
+
+      <button mat-raised-button color="primary" *ngIf="usuLogAdmin || usuAccedeSusFot" (click)="gestionarImgs($event)">Gestionar imagenes</button>
+      
+    </div>
+
+  </mat-card-content>
+  
+</mat-card>
+
+
+<div class="formatoCajaGrid">
+  <!-- Disenyo responsive -->
+  <!-- mostrar small -->
+  <mat-card class="mostrarSmall" *ngFor="let fotoPasa of listaPasarImgs">
+    <mat-card-subtitle>{{fotoPasa.objetoFoto.fotoString}}</mat-card-subtitle>
+    <mat-card-content>
+      <img [src]="fotoPasa.imagenCompleta || 'assets/imgApp/no-imagen.jpg'" alt="imagen vacia" class="imgSmall">
+    </mat-card-content>
+    <mat-card-footer>
+      <p class="marginCard">{{fotoPasa.objetoFoto.fechaSubidaFoto}}</p>
+      <br>
+      <button class="marginCardBtn" button mat-raised-button color="warn" *ngIf="actGestionImg === true" (click)="borrarImg($event, fotoPasa.objetoFoto.idFoto)">Borrar</button>
+    </mat-card-footer>
+  </mat-card>
+
+  <!-- medium small -->
+
+  <!-- class="mostrarMediumSmall" -->
+  <mat-card class="mostrarMediumSmall" *ngFor="let fotoPasa of listaPasarImgs"><!-- *ngFor="let fotoPasa of listaPasarImgs" -->
+    <mat-card-subtitle class="tituloFoto">{{fotoPasa.objetoFoto.fotoString}}</mat-card-subtitle>
+    <mat-card-content><!--Imagen-->
+      <img [src]="fotoPasa.imagenCompleta || 'assets/imgApp/no-imagen.jpg'" alt="imagen vacia" class="imgMediumSmall">
+    </mat-card-content>
+    <mat-card-footer><!--varios datos-->
+      <p class="marginCard">{{fotoPasa.objetoFoto.fechaSubidaFoto}}</p>
+      <br>
+      <button class="marginCardBtn" button mat-raised-button color="warn" *ngIf="actGestionImg === true" (click)="borrarImg($event, fotoPasa.objetoFoto.idFoto)">Borrar</button>
+    </mat-card-footer>
+  </mat-card>
+
+  <!-- medium -->
+
+  <mat-card class="mostrarMedium" *ngFor="let fotoPasa of listaPasarImgs">
+    <mat-card-subtitle>{{fotoPasa.objetoFoto.fotoString}}</mat-card-subtitle>
+    <mat-card-content><!--Imagen-->
+      <img [src]="fotoPasa.imagenCompleta || 'assets/imgApp/no-imagen.jpg'" alt="imagen vacia" class="imgMedium">
+    </mat-card-content>
+    <mat-card-footer><!--varios datos-->
+      <p class="marginCard">{{fotoPasa.objetoFoto.fechaSubidaFoto}}</p>
+      <br>
+      <button class="marginCardBtn" button mat-raised-button color="warn" *ngIf="actGestionImg === true" (click)="borrarImg($event, fotoPasa.objetoFoto.idFoto)">Borrar</button>
+    </mat-card-footer>
+  </mat-card>
+
+
+  <!-- medium big -->
+
+  <mat-card class="mostrarMediumBig" *ngFor="let fotoPasa of listaPasarImgs">
+    <mat-card-subtitle>{{fotoPasa.objetoFoto.fotoString}}</mat-card-subtitle>
+    <mat-card-content><!--Imagen-->
+      <img [src]="fotoPasa.imagenCompleta || 'assets/imgApp/no-imagen.jpg'" alt="imagen vacia" class="imgMediumBig">
+    </mat-card-content>
+    <mat-card-footer><!--varios datos-->
+      <p class="marginCard">{{fotoPasa.objetoFoto.fechaSubidaFoto}}</p>
+      <br>
+      <button class="marginCardBtn" button mat-raised-button color="warn" *ngIf="actGestionImg === true" (click)="borrarImg($event, fotoPasa.objetoFoto.idFoto)">Borrar</button>
+    </mat-card-footer>
+  </mat-card>
+
+  <!-- big -->
+
+  <mat-card class="mostrarBig" *ngFor="let fotoPasa of listaPasarImgs">
+    <mat-card-subtitle>{{fotoPasa.objetoFoto.fotoString}}</mat-card-subtitle>
+    <mat-card-content><!--Imagen-->
+      <img [src]="fotoPasa.imagenCompleta || 'assets/imgApp/no-imagen.jpg'" alt="imagen vacia" class="imgBig">
+    </mat-card-content>
+    <mat-card-footer><!--varios datos-->
+      <p class="marginCard">{{fotoPasa.objetoFoto.fechaSubidaFoto}}</p>
+      <br>
+      <button class="marginCardBtn" button mat-raised-button color="warn" *ngIf="actGestionImg === true" (click)="borrarImg($event, fotoPasa.objetoFoto.idFoto)">Borrar</button>
+    </mat-card-footer>
+  </mat-card>
+
+</div>
+
+</div>

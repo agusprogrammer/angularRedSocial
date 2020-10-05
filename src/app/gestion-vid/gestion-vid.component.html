@@ -1,0 +1,105 @@
+<div class="longComponent">
+<mat-card class="matCardTop">
+  <mat-card-header>
+    <mat-card-title>Videos</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="ponerIzq">
+      <app-subir-vid [usuarioLoggedSubVid] = "usuarioLogged"></app-subir-vid>
+      <br>
+      <button mat-raised-button color="primary" *ngIf="usuLogAdmin || usuAccedeSusVid" (click)="gestionarVids($event)">Gestionar Videos</button>
+    </div>
+    
+  </mat-card-content>
+</mat-card>
+<div class="formatoCajaGrid">
+
+  <!-- mostrar videos con bucles -->
+  <mat-card class="mostrarSmall" *ngFor="let videoPasa of listObjPasarVid">
+
+    <mat-card-subtitle *ngIf="noVideosEnLista == false">{{videoPasa.objVideo.videoString}}</mat-card-subtitle>
+    <mat-card-content>
+      <!-- Si no hay videos -->
+      <div *ngIf="noVideosEnLista == true">
+        <img [src]="'assets/imgApp/no-video.png'" alt="No videos subidos" class="imgNoVid">
+        <br>
+        <p>No hay videos subidos</p>
+      </div>
+      <!-- mostrar la lista de videos -->
+      
+      <!--<video [src]="videoPasa.videoCompleto" controls *ngIf="noVideosEnLista == false" class="vidSmall">Tu navegador no soporta el video HTML 5</video>-->
+      <!-- [src]="videoPasa.fichero" -->
+      
+      <!--
+      <video controls *ngIf="noVideosEnLista == false" class="vidSmall">
+        <source src="{{videoPasa.fichero | safe}}" type="{{videoPasa.tipoArchString}}">
+        Tu navegador no soporta el video HTML 5
+      </video>-->
+
+      <!-- https://stackoverflow.com/questions/35138424/how-do-i-download-a-file-with-angular2-or-greater -->
+      <!-- class="marginCardBtn" -->
+      <button mat-raised-button color="primary" (click)="descargarVideo(videoPasa, $event)">Descargar video</button>
+
+    </mat-card-content>
+    <mat-card-footer>
+      <p class="marginCard" *ngIf="noVideosEnLista == false">{{videoPasa.objVideo.fechaSubidaVid}}</p>
+      <!--<br>--><!-- class="marginCardBtn" -->
+      <button mat-raised-button color="warn" class="marginCardBtn" *ngIf="actGestionVid == true" (click)="borrarVid(videoPasa.objVideo.idVideo,$event)"></button>
+    </mat-card-footer>
+
+  </mat-card>
+
+  <mat-card class="mostrarMediumSmall">
+    <mat-card-subtitle></mat-card-subtitle>
+    <mat-card-content>
+      <!-- poner video-->
+    </mat-card-content>
+    <mat-card-footer>
+      <p class="marginCard"></p>
+      <br>
+      <button class="marginCardBtn" button mat-raised-button color="warn"></button>
+    </mat-card-footer>
+
+  </mat-card>
+
+  <mat-card class="mostrarMedium">
+    <mat-card-subtitle></mat-card-subtitle>
+    <mat-card-content>
+      <!-- poner video-->
+    </mat-card-content>
+    <mat-card-footer>
+      <p class="marginCard"></p>
+      <br>
+      <button class="marginCardBtn" button mat-raised-button color="warn"></button>
+    </mat-card-footer>
+
+  </mat-card>
+
+  <mat-card class="mostrarMediumBig">
+    <mat-card-subtitle></mat-card-subtitle>
+    <mat-card-content>
+      <!-- poner video-->
+    </mat-card-content>
+    <mat-card-footer>
+      <p class="marginCard"></p>
+      <br>
+      <button class="marginCardBtn" button mat-raised-button color="warn"></button>
+    </mat-card-footer>
+
+  </mat-card>
+
+  <mat-card class="mostrarBig">
+    <mat-card-subtitle></mat-card-subtitle>
+    <mat-card-content>
+      <!-- poner video-->
+    </mat-card-content>
+    <mat-card-footer>
+      <p class="marginCard"></p>
+      <br>
+      <button class="marginCardBtn" button mat-raised-button color="warn"></button>
+    </mat-card-footer>
+
+  </mat-card>
+
+</div>
+</div>
