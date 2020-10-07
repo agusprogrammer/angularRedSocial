@@ -1,7 +1,7 @@
 <div class="longComponent">
 
 <button mat-raised-button (click)="actualizarCambios()" class="marginBtnAct" color="primary">Cargar publicaciones</button> 
-<h1 *ngIf="numPubl === 0">{{mensajeNoPubl}}</h1>
+<h1 *ngIf="numPubl === 0" class="margenNoPubl">{{mensajeNoPubl}}</h1>
 
 <div *ngIf="numPubl > 0">
 <mat-card  *ngFor="let publCard of dataCardPubl"><!-- parte de publicaciones -->

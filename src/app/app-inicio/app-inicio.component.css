@@ -16,12 +16,12 @@ mat-sidenav {
     color: white;   /* de letra */
     width: 200px;
     display: flex;
-    height: 80vh;
+    height: 85vh;
 }
 
 /* Zona de contenido */
 mat-sidenav-content {
-    height: 80vh;
+    height: 85vh;
 }
 
 .contenidoNav {
