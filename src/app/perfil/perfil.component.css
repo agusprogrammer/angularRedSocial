@@ -100,21 +100,30 @@ input[type=file]::-webkit-file-upload-button {
 
 }
 
+
+.imgs {
+    display: block;
+    /*float: left; */
+}
+
+
 .imgMuestra {
 
     margin: 5px;
-    float: left;
-    display: block;
-    width: 30%;
-    height: 25%;
+    /* float: left; */
+    /* display: block; */
+    width: 250px;
+    height: 200px;
 }
 
+/*
 .listaImgMuestra {
     margin-left: 25px;
     margin-right: 25px;
     margin-top: 25px;
     margin-bottom: 25px;
 }
+*/
 
 /* boton para mostrar fotos (no aplicado, quitar en el futuro sino se usa)*/
 .btnMostrar {

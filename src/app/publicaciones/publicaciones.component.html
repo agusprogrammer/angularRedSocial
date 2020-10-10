@@ -15,22 +15,29 @@
         <!-- formulario de edicion, se pondra en un futuro -->
         <!-- <app-crear-publ *ngIf="actEdit === true" [usuarioEntra] = "usuarioLogged" [usuarioVisitado] = "usuarioVisita" [publEdit] = "publDatos"></app-crear-publ> -->
     </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="warn" *ngIf="publCard.boolBtnBorrar === true || boolEsAdmin === true" (click)="borrarPubl(publCard.publObj.idPublicacion, false)">Borrar Publicación</button>
+        <button mat-raised-button color="primary" (click)="mostrarComentarios(publCard.idPubl, false)">Comentarios</button>
+    </mat-card-actions>
     <mat-card-footer>
         <p class="margenDatos" class="infoPrivaColor">{{publCard.fechaPubl}}</p>
 
         <p *ngIf="publCard.esPrivadaNum === 1" class="margenDatos" class="infoPrivaColor">Publicación Privada</p>
         <p *ngIf="publCard.esPrivadaNum === 0" class="margenDatos" class="infoPrivaColor">Publicación Pública</p>
 
-        <!-- boton para editar, se pondra en un futuro-->
-        <!-- <button mat-raised-button color="primary" class="marginBtnEditar" *ngIf="propioUsu === true">Editar</button> --><!-- edicion: ver mas adelante -->
+        <!-- <mat-card-actions> -->
+            <!-- boton para editar, se pondra en un futuro-->
+            <!-- <button mat-raised-button color="primary" class="marginBtnEditar" *ngIf="propioUsu === true">Editar</button> --><!-- edicion: ver mas adelante -->
         
-        <button mat-raised-button color="warn" class="marginBtnBorrar" *ngIf="propioUsu === true || boolEsAdmin === true" (click)="borrarPubl(publCard.publObj.idPublicacion, false)">Borrar Publicación</button>
-        
-        <!-- boton para subir arriba en el scroll, se pondra en un futuro
-        <button mat-raised-button class="marginBtnBorrar" *ngIf="publCard.actBtnSubir === true" (click)="eventoScrollArriba()">Subir arriba</button>
-        -->
-        <button mat-raised-button color="primary" class="marginBtnComentarios" (click)="mostrarComentarios(publCard.idPubl, false)">Comentarios</button>
-        
+            <!-- <button mat-raised-button color="warn" *ngIf="propioUsu === true || boolEsAdmin === true" (click)="borrarPubl(publCard.publObj.idPublicacion, false)">Borrar Publicación</button> -->
+            <!-- class="marginBtnBorrar" -->
+
+            <!-- boton para subir arriba en el scroll, se pondra en un futuro
+            <button mat-raised-button class="marginBtnBorrar" *ngIf="publCard.actBtnSubir === true" (click)="eventoScrollArriba()">Subir arriba</button>
+            -->
+            <!-- <button mat-raised-button color="primary" (click)="mostrarComentarios(publCard.idPubl, false)">Comentarios</button> -->
+            <!-- class="marginBtnComentarios" -->
+        <!-- </mat-card-actions> -->
 
         <div *ngIf="boolComment === true && idPublCommentAbrir === publCard.idPubl">
 
@@ -55,7 +62,7 @@
                     <p>{{com.comment.textoComentario}}</p>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-raised-button color="warn" class="btnBorrarComment" *ngIf="propioUsu === true || boolEsAdmin === true || com.comment.usuarioComent.idUsu === usuarioVisita.idUsu" (click)="borrarComment(com.comment.idComentario)">Borrar</button>
+                    <button mat-raised-button color="warn" class="btnBorrarComment" *ngIf="com.btnCommentbool === true || boolEsAdmin === true || com.comment.usuarioComent.idUsu === usuarioVisita.idUsu" (click)="borrarComment(com.comment.idComentario)">Borrar</button>
                 </mat-card-actions>
                
             </div>

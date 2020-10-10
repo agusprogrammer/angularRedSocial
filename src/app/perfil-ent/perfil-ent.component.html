@@ -32,8 +32,10 @@
     <mat-card-actions>
       <!-- la edicion hacer mas adelante -->
       <!-- <button mat-raised-button color="primary" class="marginBtnEditar" *ngIf="propioUsu === true" (click)="activarEditEntradas()">Editar</button> -->
-      <button mat-raised-button color="warn" *ngIf="propioUsu === true || boolEsAdmin === true" (click)="borrarEntr(card.idEntr)">Borrar</button><!--  -->
-
+      <div *ngIf="card.noEntradas === false">
+        <button mat-raised-button color="warn" *ngIf="propioUsu === true || boolEsAdmin === true" (click)="borrarEntr(card.idEntr)">Borrar</button>
+      </div>
+      
     </mat-card-actions>
   </mat-card>
 

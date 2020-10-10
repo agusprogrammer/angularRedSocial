@@ -79,7 +79,7 @@ export class PerfilComponent implements OnInit {
     this.usuarioPropio = false;
     this.activarImgs = false;
 
-    this.numImgMuestraMax = 20;  // seleccionamos el numero de imagenes que se muestran en el perfil
+    this.numImgMuestraMax = 3;  // seleccionamos el numero de imagenes que se muestran en el perfil
 
     this.imagenFilePortada = null;
     this.imagenFilePerfil = null;

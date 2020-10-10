@@ -13,6 +13,7 @@ import { AppDialogSelectComponent } from '../app-dialog-select/app-dialog-select
  * definicion del card usado con paginacion del componente de entradas
  */
 export interface Card {
+  noEntradas: boolean;
   idEntr: number;
   titulo: string;
   texto: string;
@@ -107,7 +108,7 @@ export class PerfilEntComponent implements OnInit, OnDestroy {
   private comprobarUsu() {
 
     // es el que entra admin? si = puede modificar, no = no puede modificar
-    if (this.usuarioEntra.esAdministrador > 0) {
+    if (this.usuarioVisitado.esAdministrador > 0) {
       this.boolEsAdmin = true;
     } else {
       this.boolEsAdmin = false;
@@ -124,8 +125,10 @@ export class PerfilEntComponent implements OnInit, OnDestroy {
    */
   private recogerEntradas() {
 
+    // console.log('Usuario propietario de las entradas: '  + this.usuarioEntra.idUsu);
+    // console.log('Usuario al que se le vistan las entradas: ' + this.usuarioVisitado.idUsu);
     // cogemos entradas del servicio
-    this.entrServ.getEntradasUsuario(this.usuarioVisitado.idUsu).subscribe(
+    this.entrServ.getEntradasUsuario(this.usuarioEntra.idUsu).subscribe(
       data => {
         this.listaEntrAny = data;
         this.listaEntr = this.listaEntrAny;
@@ -139,7 +142,8 @@ export class PerfilEntComponent implements OnInit, OnDestroy {
 
           // mostrar que no hay entradas
           this.dataCard.push(
-          {idEntr: 0,
+          {noEntradas: true,
+          idEntr: 0,
           titulo: 'No se han escrito entradas todavia',
           texto: '',
           fecha: null});
@@ -150,7 +154,8 @@ export class PerfilEntComponent implements OnInit, OnDestroy {
           for (const entr of this.listaEntr) {
 
             this.dataCard.push(
-              {idEntr: entr.idEntrada,
+              {noEntradas: false,
+              idEntr: entr.idEntrada,
               titulo: entr.tituloEntrada,
               texto: entr.textoEntrada,
               fecha: entr.fechaCreacionEnt});

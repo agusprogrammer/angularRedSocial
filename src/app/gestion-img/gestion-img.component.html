@@ -9,7 +9,9 @@
       <app-subir-img *ngIf="usuLogAdmin || usuAccedeSusFot" [usuarioLoggedSubImg]="usuarioLogged" (eventEmitirImg)="recibirFotoSubida($event)"></app-subir-img>
       <br>
 
-      <button mat-raised-button color="primary" *ngIf="usuLogAdmin || usuAccedeSusFot" (click)="gestionarImgs($event)">Gestionar imagenes</button>
+      <div *ngIf="boolNoImgs === false">
+        <button mat-raised-button color="primary" *ngIf="usuLogAdmin || usuAccedeSusFot" (click)="gestionarImgs($event)">Gestionar imagenes</button>
+      </div>
       
     </div>
 

@@ -65,29 +65,68 @@
       </mat-card-header>
       <mat-card-content><!-- class="btnMostrar" -->
         <button mat-raised-button color = "primary" (click)="mostrarFotos()">Mostrar todas</button>
+        <br>
+        <br>
+
+        <!-- <div class="imgs"> -->
+          <!-- class="listaImgMuestra" -->
+        
+        <div *ngFor="let pasarImg of listaPasarImgMuestra" class="imgs">
+            <img [src]="pasarImg.imagenCompleta || 'assets/imgApp/no-imagen.jpg'" alt="sin imagen" class="imgMuestra">
+        </div>
+
+        <!--
+        <table *ngFor="let pasarImg of listaPasarImgMuestra; let i = index" [attr.data-index]="i">
+        <table *ngFor="let i=0; i < listaPasarImgMuestra.length; i++">
+          <div *ngIf="i < 1">
+            <tr>
+            <td>
+              <img [src]="pasarImg.imagenCompleta || 'assets/imgApp/no-imagen.jpg'" alt="sin imagen" class="imgMuestra">
+            </td>
+            </tr>
+          </div>
+          
+          <div *ngIf="i >= 2">
+            <tr>
+            <td>
+              <img [src]="pasarImg.imagenCompleta || 'assets/imgApp/no-imagen.jpg'" alt="sin imagen" class="imgMuestra">
+            </td>
+            </tr>
+          </div>
+          
+        </table>
+        -->
+        
+        <!--
+        <mat-grid-list cols="2" rowHeight="2:1" *ngFor="let pasarImg of listaPasarImgMuestra">
+          <mat-grid-tile>1
+            <img [src]="pasarImg.imagenCompleta || 'assets/imgApp/no-imagen.jpg'" alt="sin imagen">
+          </mat-grid-tile>
+        </mat-grid-list> -->
+
+
+        <!-- </div> -->
       </mat-card-content>
     </mat-card>
-    
-    <div *ngFor="let pasarImg of listaPasarImgMuestra" class="listaImgMuestra">
-      <mat-card-content >
-        <img [src]="pasarImg.imagenCompleta || 'assets/imgApp/no-imagen.jpg'" alt="sin imagen" class="imgMuestra">
-      </mat-card-content>
-    </div>
-    <br>
 
-    
+    <!--<mat-grid-list cols="2" rowHeight="2:1" *ngFor="let pasarImg of listaPasarImgMuestra">
+      <mat-grid-tile>1
+        <img [src]="pasarImg.imagenCompleta || 'assets/imgApp/no-imagen.jpg'" alt="sin imagen">
+      </mat-grid-tile>
+      <mat-grid-tile>1</mat-grid-tile>
+
+    </mat-grid-list>-->
+
     </div>
 
     <div class="zonaPublicaciones">
-   
-    <app-perfil-ent [usuarioEntra] = "usuarioPerfil" [usuarioVisitado] = "usuarioVisita"></app-perfil-ent> <!-- pasar usuarios -->
+      <app-perfil-ent [usuarioEntra] = "usuarioPerfil" [usuarioVisitado] = "usuarioVisita"></app-perfil-ent> <!-- pasar usuarios -->
     
-    <app-crear-publ *ngIf="usuarioPropio === true" [usuarioEntra] = "usuarioPerfil" [usuarioVisitado] = "usuarioVisita"></app-crear-publ>
+      <app-crear-publ *ngIf="usuarioPropio === true" [usuarioEntra] = "usuarioPerfil" [usuarioVisitado] = "usuarioVisita"></app-crear-publ>
 
-    <!-- mostrar publicaciones -->
-    <app-publicaciones [usuarioLogged] = "usuarioPerfil" [usuarioVisita] = "usuarioVisita" [urlGetPubl] = "urlGet"></app-publicaciones>
-
-  </div>
+      <!-- mostrar publicaciones -->
+      <app-publicaciones [usuarioLogged] = "usuarioPerfil" [usuarioVisita] = "usuarioVisita" [urlGetPubl] = "urlGet"></app-publicaciones>
+    </div>
 
 </div>
 

@@ -29,6 +29,7 @@ export interface CardPubl {
   fechaPubl: Date;
   idPubl: number;
   actBtnSubir: boolean;
+  boolBtnBorrar: boolean;
 }
 
 /**
@@ -38,6 +39,7 @@ export interface CardComment {
   idPubl: number;
   comment: ComentarioModel;
   imgComment: any;
+  btnCommentbool: boolean;
 }
 
 @Component({
@@ -196,6 +198,10 @@ export class PublicacionesComponent implements OnInit {
     this.numElementoCont = 0; // poner contador a 0
     this.boolActivarSubir = false; // poner boton de subir a false
 
+    // obtener los ids para ver el tipo de usuario
+    this.idUsuLogged = this.usuarioLogged.idUsu;
+    this.idUsuVisita = this.usuarioVisita.idUsu;
+
     this.comprobacionUrl();
     this.comprobarUsuario(); // comprobar usuario
 
@@ -207,9 +213,6 @@ export class PublicacionesComponent implements OnInit {
    * metodo que comprueba el tipo de url para saber a donde se dirije el get del servicio
    */
   private comprobacionUrl() {
-
-    this.idUsuLogged = this.usuarioLogged.idUsu;
-    this.idUsuVisita = this.usuarioVisita.idUsu;
 
     if (this.urlGetPubl === 'http://localhost:9191/getPublicacionesUsuario/') {
       if (this.idUsuLogged !== this.idUsuVisita) {
@@ -246,18 +249,21 @@ export class PublicacionesComponent implements OnInit {
   /**
    * comprobamos el usuario que entra se visita a si mismo sus publicaciones o es un admin
    */
-  private comprobarUsuario() {
+   private comprobarUsuario() {
 
     // tslint:disable-next-line:triple-equals
-    if (this.usuarioLogged.idUsu == this.usuarioVisita.idUsu) {
+    /*
+    if (this.idUsuLogged === this.idUsuVisita) {
       this.propioUsu = true; // puede modificar sus publicaciones
     }
+    */
 
     if (this.usuarioVisita.esAdministrador > 0) {
       this.boolEsAdmin = true; // solo puede borrar publicaciones de otros usuarios
     }
 
   }
+
 
   /**
    * metodo para recoger publicaciones y comentarios
@@ -330,6 +336,13 @@ export class PublicacionesComponent implements OnInit {
 
                 this.numElementoCont = this.numElementoCont + 1;
 
+                // Si la publicacion es del usuario
+                this.propioUsu = false;
+
+                if (this.usuarioVisita.idUsu === publ.usuarioPubl.idUsu) {
+                  this.propioUsu = true;
+                }
+
                 this.dataCardPubl.push(
                   {
                     usuarioPublFoto: this.pasarImgPerfilPubl.imagenCompleta,
@@ -340,7 +353,8 @@ export class PublicacionesComponent implements OnInit {
                     publObj: publ,
                     fechaPubl: publ.fechaCreacionPub,
                     idPubl: publ.idPublicacion,
-                    actBtnSubir: this.boolActivarSubir
+                    actBtnSubir: this.boolActivarSubir,
+                    boolBtnBorrar: this.propioUsu
                   });
 
                 // this.recogerComentarios(publ);
@@ -373,10 +387,18 @@ export class PublicacionesComponent implements OnInit {
               // tslint:disable-next-line:no-string-literal
               this.fotoComentUsu = dataFotoComent['ficheroCompletoString'];
 
+              // comprobar si el usuario es el mismo del comentario
+              this.propioUsu = false;
+
+              if (com.usuarioComent.idUsu === this.usuarioVisita.idUsu) {
+                this.propioUsu = true;
+              }
+
               this.dataCardComment.push({
                 idPubl: idPublicacion,
                 comment: com,
-                imgComment: this.fotoComentUsu
+                imgComment: this.fotoComentUsu,
+                btnCommentbool: this.propioUsu
               });
 
             });

@@ -15,7 +15,7 @@
     </mat-card-actions>
     <mat-card-actions *ngIf="cardContact.boolAmigo === false">
       <!-- acciones en caso de no ser amigos, visitar si es publico, enviar peticion amistad -->
-      <button mat-raised-button color="primary" *ngIf="cardContact.usuarioLog.esAdministrador === true || cardContact.usuario.perfilPrivado < 1" (click)="visitarPerfil(cardContact.usuario)">Visitar</button>
+      <button mat-raised-button color="primary" *ngIf="cardContact.usuarioLog.esAdministrador > 0 || cardContact.usuario.perfilPrivado < 1" (click)="visitarPerfil(cardContact.usuario)">Visitar</button>
       <button mat-raised-button color="primary" *ngIf="cardContact.boolAmigo === false" (click)="enviarPeticionAmistad(cardContact.usuario)">Enviar peticion</button>
     </mat-card-actions>
   </mat-card>

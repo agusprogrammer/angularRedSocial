@@ -51,6 +51,8 @@ export class GestionImgComponent implements OnInit {
   private pasarImg: PasarImgObj;              // objeto para pasar una a una las imagenes al array
   public listaPasarImgs: PasarImgObj[] = [];  // array para mostrar las imagenes en html y el resto de datos
 
+  public boolNoImgs: boolean;   // Variable que oculta el boton de borrar sino hay imagenes
+
   // variables para mostrar fotos 2
   private recibirArch: ArchivosGen;
 
@@ -100,6 +102,8 @@ export class GestionImgComponent implements OnInit {
     this.idUsuarioLogged = this.usuarioLogged.idUsu;
     this.idUsuVisita = this.usuarioVisita.idUsu;
 
+    this.boolNoImgs = true;
+
     this.comprobarUsu();
     this.recogerListaFotos();
 
@@ -146,6 +150,10 @@ export class GestionImgComponent implements OnInit {
 
     this.fotoServ.getArchivosFotoIdUsu(this.idUsuVisitarFot).subscribe(
       data => {
+
+        this.listaPasarImgs = [];
+        this.listFotosAny = [];
+
         this.listFotosAny = data;
 
         console.log(this.listFotosAny);
@@ -156,8 +164,11 @@ export class GestionImgComponent implements OnInit {
           this.mostrarFotoVacia.fotoString = 'No hay fotos subidas';
           this.pasarImg.objetoFoto = this.mostrarFotoVacia;
           this.listaPasarImgs[0] = this.pasarImg;
+          this.boolNoImgs = true;
 
         } else {
+
+        this.boolNoImgs = false;
 
         for (this.objFotAny of this.listFotosAny) {
 
@@ -226,8 +237,10 @@ export class GestionImgComponent implements OnInit {
   private actualizarListaFotos() {
 
     // vaciar lista de fotos y volver a actualizar
+    this.listFotosAny = [];
     this.listFotos = [];
     this.listaPasarImgs = [];
+    this.boolNoImgs = true;
     this.recogerListaFotos();
   }
 

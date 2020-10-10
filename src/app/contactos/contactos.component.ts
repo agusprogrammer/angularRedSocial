@@ -261,7 +261,11 @@ export class ContactosComponent implements OnInit, OnDestroy {
         for (const usuAny of this.usuListAny) {
           // console.log(usuAny);
           this.usu = usuAny;
-          this.usuListUsuarios.push(this.usu);
+
+          if (this.usu.idUsu !== this.usuarioLogged.idUsu) {
+            this.usuListUsuarios.push(this.usu);
+          }
+
         }
 
         this.numUsuarios = this.usuListUsuarios.length;
@@ -374,7 +378,7 @@ export class ContactosComponent implements OnInit, OnDestroy {
    */
   private enviarPeticionAmistadGuardar(usuReceptGuardar: UsuarioModel) {
 
-    if (this.boolEstaEnPet === true && this.boolEstaEnPet2 === true) {
+    if (this.boolEstaEnPet === false && this.boolEstaEnPet2 === false) {
 
       this.amUsuPost = new AmigosUsuModel();
 
